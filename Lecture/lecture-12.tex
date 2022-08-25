@@ -1,0 +1,114 @@
+\section{Lecture March 15th}
+
+\subsection{Recall: Number Fields}
+
+\begin{definition}
+A complex number $\alpha$ is called algebraic if it's algebraic over $\Qbb$.
+\end{definition}
+
+\begin{proposition}
+The set $\overline{\Qbb}$ form a subfield of the complex numbers.
+\end{proposition}
+
+\begin{definition}
+A number field is a subfield $k$ of $\Cbb$ whose degree over $\Qbb$ is finite. Using the Primitive Element Theorem, $k$ being a number field implies $k = \Qbb(\alpha)$ for some $\alpha \in \overline{\Qbb}$, they are actually equivalent definitions.
+\end{definition}
+
+\begin{remark}
+Crux of the proof of Primitive Element Theorem: Suppose $K = K_1(\alpha, \beta)$, then $K = K_1(\theta)$, and we can find $\theta$ as a function of $\alpha$ and $\beta$.\\\\
+Write the minimal polynomial of $\alpha, \beta$ over $k_1$:
+\[(t - a_1)...(t- a_n), a_i \in \overline{\Qbb}, a_1 = \alpha\]
+\[(t - b_1)...(t- b_m), b_i \in \overline{\Qbb}, b_1 = \beta\]
+Irreducible polynomials in characteristic zero are separable, so we have that $a_1, ..., a_n$ are distinct, and $b_1, ..., b_m$ are distinct.\\\\
+Hence for each $i$ and each $k \neq 1$, there exist at most one $x \in K$ such that
+\[a_i + xb_k = a_1 + xb_1, ie. x = (a_i - \alpha)(b_1 - b_k)^{-1}\]
+Since there are only finitely many of these equations, we can choose some non-zero $c \in k_1$ such that
+\[a_i + cb_k \neq a_1 + cb_1, \forall 1 \leq i \leq n, 2 \leq k \leq m\]
+Define $\theta = \alpha + c \beta$, then we claim that
+\[K_1(\alpha, \beta) = K_1(\theta)\]
+This part is done in Ireland and Stewart.
+\end{remark}
+
+\begin{example}[Page 35]
+The Primitive Element Theorem actually gives us a way to find the primitive element. For example, take $K = \Qbb(\sqrt{2}, 5^{1/3})$, and let $\alpha_1 = \sqrt{2}, \beta_1 = 5^{1/3}$.\\\\
+We have that $\alpha_2 = -\sqrt{2}$, $\beta_2 = \zeta_3 5^{1/3}$, $\beta_3 = \zeta_3^3 5^{1/3}$, where $\zeta_3 = e^{2\pi i /3}$.\\\\
+Note that we can take $c = 1$, and it has the property that
+\[\alpha_i + c\beta_k \neq \alpha_1 + c\beta_1, 1 \leq i \leq 2, 2 \leq k \leq 3\]
+SInce LHS is not real and RHS is always real.\\\\
+SO we can take
+\[\theta = \sqrt{2} + 5^{1/3}\]
+So we have that
+\[\Qbb(\sqrt{2}, 5^{1/3}) = \Qbb(\sqrt{2} + 5^{1/3})\]
+\end{example}
+
+\subsection{Conjugates of algebraic numbers}
+
+The embeddings of a number field in $\Cbb$ play a fundamental role in Number Theory.
+
+\begin{theorem}[Pg. 40]
+Let $K = \Qbb(\theta)$ be a number field of degree $n$ over $\Qbb$. Then there exists exactly $n$ distinct field embeddings of $K$ into $\Cbb$. (Label these $\sigma_1, ..., \sigma_n: K \to \Cbb$).\\\\
+Moreover, $\sigma_i(\theta)$ are the zeroes in $\Cbb$ of the minimal polynomial of $\Qbb(\theta)$ over $\Qbb$.
+\end{theorem}
+
+\begin{proof}
+Suppose $\sigma: K \to \Cbb$ is an embedding, then $\sigma$ has to fix $\Qbb$ (becuse it sends $1$ to $1$), so field automorphisms permutes the roots of the minimal polynomial, so $\sigma(\theta)$ is a root of the minimal polynomial over $\theta$ over $\Qbb$.\\\\
+(We note that if two field isomorphism agrees on $\theta$, they are the same isomorphism, so it is injective).\\\\
+Now conversely, suppose I have two field automorphisms that sends $\theta$ to the same root, then we wish to show that they are the same field automorphism.\\\\
+Indeed, from 1540 we have a unique field isomorphism (so injective)
+\[\Qbb(\theta) \cong \Qbb(\theta_i), \theta \mapsto \theta_i\]
+THis isomorphism comes from (1540 - Proposition 8.6 from Silverman)
+\[\Qbb(\theta) \cong \frac{\Qbb[x]}{(f)}, \Qbb(\theta_i) \cong \frac{\Qbb[x]}{(f)}\]
+So there's a biection between the roots of $f$ and the embeddings of $K$ into $\Cbb$.
+\end{proof}
+
+\subsection{Discriminant of bases, Vandermount determinant}
+
+\begin{definition}
+Let $K = \Qbb(\theta)$ be a number field of degree $n$, and let $\{\alpha_1, ..., \alpha_n\}$ be a basis of $K$ as a vector space over $\Qbb$. Let $\sigma_i: K \to \Cbb$, $1 \leq i \leq n$ be embeddings of $K$ into $\Cbb$.\\\\
+Then, the \textbf{discriminant} of $\{\alpha_1, ..., \alpha_n\}$ is denoted as
+\[\Delta[\alpha_1, ..., \alpha_n] = det(\sigma_i(\alpha_j))^2 = det\begin{bmatrix}
+\sigma_1(\alpha_1) & ... & \sigma_1(\alpha_n)\\
+\vdots & \ddots & \vdots\\
+\sigma_n(\alpha_1) & ... & \sigma_n(\alpha_n)\\
+\end{bmatrix}\]
+If $\{\beta_1, ..., \beta_n\}$ is another basis, then for all $1 \leq k \leq n$,
+\[\beta_k = \sum_{i = 1}^n C_{ik} \alpha_i, C_{ik} \in \Qbb\]
+, where $det(C_{ik}) \neq 0$ since it's a map from basis to basis.
+\end{definition}
+
+\begin{proposition} The discriminant perserves linear transformation in the sense that, ie
+\[\Delta[\beta_1, ..., \beta_n] = (det(C_{ik})^2 \cdot \Delta[\alpha_1, ..., \alpha_n]\]
+\end{proposition}
+
+\begin{proof}
+Exercise!
+\end{proof}
+
+\begin{definition}
+A \textit{Vandermount Matrix} is a matrix of the following form:
+\[V = \begin{bmatrix}
+1 & t_1 & ... & t_1^{n-1}\\
+1 & t_2 & ... & t_2^{n-1}\\
+\vdots & \vdots & \ddots & \vdots\\
+1 & t_n & ... & t_n^{n-1}\\
+\end{bmatrix}\]
+\end{definition}
+
+\begin{proposition}
+Then the determinant of $V$ is
+\[det(V) = \prod_{1 \leq i < j \leq n} (t_i - t_j)\]
+\end{proposition}
+
+\begin{theorem}[Pg. 42]
+The discriminant of any basis for $K = \Qbb(\theta)$ is rational and non-zero.
+\end{theorem}
+
+\begin{proof}
+The most natural choice of basis is $1, \theta, ..., \theta^{n-1}$, it suffices for us to prove that this basis is rational and non-zero, since $(det(C_{ik})^2$ is a non-zero rational numbers.\\\\
+Write $\theta = \theta_1$, $\theta_1, ..., \theta_n$ for the conjugates of $\theta_1$ (ie. other roots of the minimal polynomial associated to $\theta$).\\\\
+Then we have that
+\[\Delta[1, ..., \theta^{n-1}] = (det(\theta_{i}^j))^2\]
+Using a general observation, we note that we are calculating the determinant of a Vandermount Matrix, where in particular
+\[(det(\theta_{i}^j))^2 = \prod_{1 \leq i < j \leq n} (\theta_i - \theta_j)^2 = disc(minpoly_\Qbb(\theta))\]
+We note that $disc(minpoly_\Qbb(\theta))$ is surjective on $\Qbb^\times$, so we are done.
+\end{proof}

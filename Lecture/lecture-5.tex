@@ -1,0 +1,148 @@
+\section{Lecture 5 (February 10)}
+
+\subsection{Linear Congruence:}
+Recall that for $m \in \Zbb_+$, $a, b \in \Zbb$, the linear congruence
+\[ax \equiv b\ (mod\ m)\]
+has a solution if and only if $(a, m) | b$.\\\\
+The question is how does one find a solution?
+
+\begin{proposition}
+The following algorithm would work, given $ax \equiv b\ (mod\ m)$
+\begin{itemize}
+    \item 1) Divide all terms in the congruence by $d = (a, m)$
+    \item 2) If Step 1 yields
+    \[a^\prime x \equiv b^\prime\ mod(m^\prime)\]
+    with $(a^\prime, m^\prime) = 1$, then $d^\prime = (a^\prime, b^\prime)$ is a unit mod $m^\prime$, so then we have that
+    \[\frac{a^\prime}{d^\prime} x \equiv \frac{b^\prime}{d^\prime} mod(m^\prime)\]
+    \item 3) Let $a^{\prime \prime} x \equiv b^{\prime \prime} mod(m^\prime)$ be the result so far, we can replace $b^{\prime \prime}$ by $b^{\prime \prime} + km^{\prime}$ such that $(a^{\prime \prime}, b^{\prime \prime} + k m^{\prime}) > 1$ allows Step 2 to be repeated so that we can find
+    \[|a^{\prime \prime \prime}| < |a^{\prime \prime}|\]
+    This process has to terminate since the absolute value of $a$ is decreasing in each step.
+\end{itemize}
+\end{proposition}
+
+\begin{example}
+Consider $10x \equiv 6\ (mod\ 14)$.\\\\
+Note that $(10, 14) = 2$, so Step 1 gives
+\[5x \equiv 3\ mod\ 7\]
+Step 2 is redundant.\\\\
+Then, consider the integer $3 + 7k$, and we want to fjnd one divisible by $5$, so clearly $3 + 7 \cdot 1 = 10$ works, so
+\[5x \equiv 10\ mod\ 7\]
+So we have that
+\[x \equiv 2\ mod\ 7\]
+\end{example}
+
+\subsection{Simultaneous Congruence}
+
+\begin{theorem}[Chinese Remainder Theorem - Classical Version]
+Suppose that $m = m_1m_2...m_t$ and that $(m_i, m_j) = 1$ for all $i \neq j$, let $b_1, ..., b_t$ be integers and consider the system of congruences
+\[x \equiv b_1 mod(m_1)\]
+\[\vdots\]
+\[x \equiv b_t mod(m_t)\]
+Then this system always has solutions, and any two solutions differ by a multiple of $m$.
+\end{theorem}
+
+\begin{proof}
+
+\end{proof}
+
+\begin{remark}[Chinese Remainder Theorem - Modern Version]
+Let $\psi: \Zbb \to \Zbb/m_1\Zbb \times ... \times \Zbb/m_k \Zbb$
+be given by
+\[\psi(n) = (n\ mod(m_1), ..., n\ mod(m_t)\]
+Then the CRT tells us that $\psi$ is surjective. Moreover, the kernel of $\psi$ is clearly $m\Zbb$. Then by the first isomorphism theorem, we have that
+\[\Zbb/m\Zbb \cong \Zbb/m_1\Zbb \times ... \times \Zbb/m_k \Zbb \]
+It follows that if $U(m)$ is the unit group of $\Zbb/m\Zbb$, then
+\[U(m) \cong U(m_1) \times ... \times U(m_t)\]
+\end{remark}
+
+\subsection{Structure of Unit Groups}
+
+\begin{theorem}[Lagrange's Theorem]
+If G is a finite group, then for every subgroup H of G, $|H|$ divides $|G|$.
+\end{theorem}
+
+\begin{corollary}
+If G is a finite group of order $n$ and $a \in G$, then $a^n = e$, where e is the identity element.
+\end{corollary}
+
+\begin{theorem}[Euler's Theorem]
+For any $a \in \Zbb$ with $(a, m) = 1$, we have
+\[a^{\phi(m)} = 1\ mod(m)\]
+\end{theorem}
+
+\begin{proof}
+Clearly in $\Zbb/m\Zbb$, for any $a \in \mathbb{Z}$ coprime to $m$, the order of $a$ is $\phi(m)$, then by Lagrange's Theorem we have that
+\[a^{\phi(m)} = 1\ mod(m)\]
+\end{proof}
+
+We present an alternative proof of Euler's Theorem:
+
+(Skip for now)
+
+\subsection{Polynomial Training}
+We will be studying roots of polynomials over $\Zbb/m\Zbb$ for various $m$, especially polynomials of the form $x^d - a$ and the case where $m = p$ is prime. We may also touch on roots in $\overline{\mathbb{F}_p}$
+
+\begin{proposition}
+If $p \nmid d$, then the polynomial $x^d - a \in (\Zbb/p\Zbb)$ $a \neq 0$ has exactly $d$ roots in some extension of $\Zbb/p\Zbb$.\\\\
+Conversely, if $p | d$, then there are fewer than $d$ roots in any extension of $\mathbb{F}_p = \Zbb/m\Zbb$.
+\end{proposition}
+
+We will prove the proposition above by consider the following:
+
+\begin{proposition}
+A non-zero polynomial $f \in K[x]$ is separable if and only if $gcd(f, f^\prime) = 1$
+\end{proposition}
+
+\begin{proof}
+Suppose that a polynomial $f \in K[x]$ is separable, now suppose they are not coprime, then there exists some gcd $g(x)$ that divides both. Moreover, let $r$ be the root of $g(x)$, then
+then clearly
+\[f(x) = (x - r)h(x)\]
+, and $h(x)$ does not have root $r$ since $f$ is separable, so moreover,
+\[f^{\prime}(x) = (x - r)h^{\prime}(x) + h(x)\]
+Since $g(r) = 0$, $f^{\prime}(x) = h(r) = 0$, but $h(x)$ does not have root $r$. Hence a contradiction.\\\\
+Conversely suppose that $gcd(f, f^\prime) = 1$, then $f$ being not separable means that it has a root $r$ of multiplicity at least 2, then
+\[f(x) = (x - r)^2h(x)\]
+and
+\[f^\prime(x) = 2(x-r)h(x) + (x-r)^2h^\prime(x)\]
+clearly also has root r, so their gcd is not 1. Hence a contradiction.
+\end{proof}
+
+{\bf Proof of Proposition 1}
+\begin{proof}
+Let $K = \Zbb/m\Zbb$, then clearly when $p \nmid d$, we have that
+\[f(x) = x^d - a, f^\prime(x) = dx^{d-1} \neq 0\]
+They don't share any common roots since $a \neq 0$, so they must be separable as they have gcd 1.\\\\
+If $p | d$, then 
+\[f^{\prime}(x) = dx^{d-1}  = 0\]
+So $gcd(f(x), f^\prime(x)) = gcd(f(x), 0) = f(x)$, so it's not separable.
+\end{proof}
+
+Now the second proposition we will use is (Prop. 4.1.2 from textbook):
+
+\begin{proposition}
+If $p$ is a prime, and if $d | p - 1$, then the polynomial $x^d - 1 \in (\Zbb/p\Zbb)[x]$ has exactly d roots in $\Zbb/p\Zbb$.
+\end{proposition}
+
+\begin{proof}
+We will use Fermat's Little Theorem which is Euler's Theorem in the case $m = p$ is a prime.\\\\
+Indeed, using Fermat's little theorem, every non-zero element if $\Zbb/p\Zbb$ is a root to
+\[x^{p - 1} - 1 = 0\]
+So $x^{p-1} - 1$ is separable. Since $d | p - 1$, we have that $(x^d - 1) | (x^{p-1} - 1)$, so all roots of $x^d - 1$ are separable and there's $d$ of them in $\Zbb/p\Zbb$.
+\end{proof}
+
+\begin{corollary}
+$G = (\Zbb/p\Zbb)^{\times}$ is cyclic
+\end{corollary}
+
+\begin{proof}
+For $d | p - 1$, consider the number of elements of $G$ of order $d$, which we will denote as $\psi(d)$, then Proposition 2 tells us that
+\[\sum_{c | d} \psi(d) = d\]
+Since the roots of $x^d - 1$ for all $d | n$ partitions the roots of $\Zbb/p\Zbb$.\\\\
+We also note that this is the identity function.\\\\
+Using the Mobius Inversion, we have that since $\psi * i = id$, $\psi = id * \mu$
+\[\psi(d) = \sum_{c | d} \mu(c) \cdot {d/c}\]
+We note that the right hand side is just $id * \mu$, and this is just $\phi$ since $id = \phi * i$ and $\mu$ and $i$ are inverses, so we have that
+\[\psi(d) = \phi(d)\]
+, so we have that $\psi(d) = \phi(d)$ for all $d | p - 1$.\\\\
+In particular, if $p > 2$, then $\psi(p - 1) = \phi(p - 1) > 1$. So there exists an element of order $p - 1$ in $G$.
+\end{proof}

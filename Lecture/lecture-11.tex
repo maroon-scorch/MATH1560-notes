@@ -1,0 +1,117 @@
+\section{Lecture March 10th}
+
+\subsection{Recall: } 
+
+\begin{definition}
+Let $b \in \Zbb_+$ be odd, and let $a \in \Zbb$. Write $b = p_1p_2...p_m$, where $p_i$ are primes (not necessarily distinct). Then the symbol $(\frac{a}{b})$ is defined by
+\[(\frac{a}{b}) = (\frac{a}{p_1})...(\frac{a}{p_m})\]
+is called the Jacobi symbol.\\\\
+Evidently this generalizes the Legendre Symbol.
+\end{definition}
+
+\begin{proposition}[Basic Properties:]
+We have that the Jacobi symbol is completely multiplicative on top and bottom:
+\begin{itemize}
+    \item i) $(\frac{a_1a_2}{b}) = (\frac{a_1}{b})(\frac{a_2}{b})$
+    \item ii) $(\frac{a}{b_1b_2}) = (\frac{a}{b_1})(\frac{a}{b_2})$
+\end{itemize}
+We note that $(\frac{a}{b}) = -1 \implies $ $a$ is not QR modulo $b$, but it equaling 1 does not necessarily imply $a$ is a QR modulo $b$.
+\end{proposition}
+
+\subsection{Main Lecture:}
+
+\begin{lemma}
+Let $r, s \in \Zbb_+$ be odd, then
+\begin{itemize}
+    \item (a) $\frac{rs - 1}{2} = \frac{r-1}{2} + \frac{s-1}{2}\ mod\ 2$
+    \item (b) $\frac{r^2s^2 - 1}{8} = \frac{r^2 - 1}{8} + \frac{s^2 - 1}{8}\ mod\ 2$
+\end{itemize}
+Note that in (b), $r^2 - 1$ is divisble by 8 since $r^2 - 1 = (r - 1)(r + 1)$, one of them has to be 0 mod 4, the other is 2 mod 4.
+\end{lemma}
+
+\begin{proof}
+Clearly $(r - 1)(s - 1)$ is divisble by $4$, so
+\[(r- 1) (s- 1) \equiv 0\ mod\ 4\]
+Hence $rs - 1 = (r - 1)(s - 1) + r + s - 2 = r + s - 2\ mod\ 4$, so
+\[rs - 1 \equiv (r - 1) + (s - 1)\ mod 4\]
+Dividing by $2$ on all sides by $4$ gives us the desired claim for (a).\\\\
+As for (b), the product $(r^2 - 1)(s^2 - 1) \equiv 0\ mod\ 16$ since each is divisble by $4$, so
+\[r^2s^2 - 1 = (r^2 - 1)(s^2 - 1) + r^2 + s^2 - 2\ mod\ 16\]
+So we have that
+\[r^2s^2 - 1 = (r^2 - 1) + (s^2 - 1)\ mod\ 16\]
+Then just divide everything by 8 gives $(b)$.
+\end{proof}
+
+\begin{corollary}
+Let $r_1, r_2, ..., r_m \in \Zbb_+$ be positive odd integers. Then,
+\begin{itemize}
+    \item (a) $\sum_{i = 1}^m \frac{r_i - 1}{2} \equiv \frac{r_1r_2...r_m - 1}{2}\ mod\ 2$
+    \item (b) $\sum_{i = 1}^m \frac{r_i^2 - 1}{8} \equiv \frac{r_1^2...r_m^2 - 1}{8}\ mod\ 2$
+\end{itemize}
+This can be done just by using induction and the previous lemma, and we will use this corollary to prove our reciprocity law.
+\end{corollary}
+
+\begin{theorem}[Reciprocity Laws for Legendre Symbols]
+Let $b \in \Zbb_+$ be odd, then
+\begin{itemize}
+    \item a) $(\frac{-1}{b}) = (-1)^{(b-1)/2}$
+    \item b) $(\frac{2}{b}) = (-1)^{(b^2-1)/8}$
+    \item If $a, b \in \Zbb_+$ are odd, then
+    \[(\frac{a}{b}) \cdot (\frac{b}{a}) = (-1)^{\frac{(a-1)(b-1)}{4}}\]
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+(a) and (b) follows from the corollary and the first and second supplemental law of quadratic reciprocity, just factor b out by its odd prime factors.\\\\
+For (c), let $a = q_1...q_l$, let $b = p_1...p_m$, then
+\[(\frac{a}{b}) \cdot (\frac{b}{a}) = \prod_{i} \prod_j (\frac{q_i}{p_j}) (\frac{p_j}{q_i}) = (-1)^{\sum_i \sum_j (\frac{q_i - 1}{2}) \cdot (\frac{p_i - 1}{2})}\]
+Then we see that applying the Fubini's Theorem and Corollary gives
+\[\sum_i \sum_j (\frac{q_i - 1}{2}) \cdot (\frac{p_i - 1}{2}) \equiv (\sum_{i} \frac{q_i - 1}{2})(\sum_{j} \frac{p_j - 1}{2}) \equiv (\frac{a - 1}{2})(\frac{b-1}{2}) \]
+So we conclude that
+    \[(\frac{a}{b}) \cdot (\frac{b}{a}) = (-1)^{\frac{(a-1)(b-1)}{4}}\]
+\end{proof}
+
+\begin{example}[Computing with the Jacobi Symbol]
+Recall the earlier example $(\frac{219}{383})$, with the Jacobi Symbol, we can flip immediately, so
+\[(\frac{219}{383}) = -(\frac{383}{219}) = -(\frac{164}{219}) = -(\frac{4}{219})(\frac{41}{219}) = -(\frac{41}{219}) = -(\frac{219}{41}) = -(\frac{14}{41})\]
+\[= -(\frac{2}{41})(\frac{7}{41}) = -(\frac{7}{41}) = -(\frac{41}{7}) = -(\frac{-1}{7}) = -1(-1) = 1\]
+\end{example}
+
+\subsection{Number Fields}
+
+\begin{definition}
+A complex number $\alpha$ is called algebraic if it is algebraic over $\mathbb{Q}$, ie. it is the roots of a non-zero rational polynomial.
+\end{definition}
+
+\begin{proposition}
+We denote the set of algebraic numbers as $\overline{\mathbb{Q}}$, and this is infact a subfield of $\Cbb$.
+\end{proposition}
+
+\begin{proof}
+The key point is that if $L/K$ is a field extension, then $\alpha \in L$ is algebraic over $K$ if and only if $K(\alpha)/K$ is finite (blackboxed lol).\\\\
+So supose $\alpha, \beta \in \overline{Q}$, then this characterization tells us that $\Qbb(\alpha)/\Qbb$ and $\Qbb(\beta)/\Qbb$ are finite, and $\Qbb(a, b)$ is no more than the product of the two extension degress here, so $\Qbb(a, b)/\Qbb$ is finite, so $a + b$, $a - b$, $ab$, $ab^{-1}$ (if $b \neq 0$) are all algebraic.
+\end{proof}
+
+\begin{definition}
+A number field is a subfield $K$ of $\Cbb$ such that
+\[[K : \Qbb] < \infty\]
+Thus every element of a number field is algebraic, so $K \subset \overline{\Qbb}$. By the definition of a finite extension, every number field has the form
+\[K = \Qbb(a_1, ..., a_n), a_1, ..., a_n \in \overline{\Qbb}\]
+However, the primitive element theorem actually tells us there exist some $\gamma \in \overline{Q}$ such that
+\[K = \Qbb(\gamma)\]
+\end{definition}
+
+\begin{remark}[Sketch of Proof for Primitive Element Theorem]
+Inductively, we note that it suffices to show that if
+\[K = K_1(a, b) \implies K = K_1(\theta), \theta \in \overline{\Qbb}\]
+Supose the minimal polynomials over $\Qbb$ of $\alpha$ and $\beta$ respectively are (facotring over $\Cbb$)
+\[(t - a_1)...(t - a_n), a_1 = a\]
+\[(t - b_1)...(t - b_m), b_1 = b\]
+Irreducible polynomials in characteristic 0 are separable!!!! So we have that all the roots here are distinct.\\\\
+Hence for each $i$ and each $k \neq 1$, there exist at most $x \in K_1$ such that $\alpha_i + x\beta_k = \alpha_1 + x\beta_1$.\\\\
+There are only finitely many of these equations, since $K_1$ is infinite, we can choose some non-zero $c \in K_1$ such that
+\[\alpha_i + c\beta_k \neq \alpha_1 + c\beta_1\]
+, for any $1 \leq i \leq n, 2 \leq k \leq m$.\\\\
+Define $\theta = \alpha + c \beta$, then we claim this $\theta$ is a primitive element, where $K_1(\alpha, \beta) = K_1(\theta)$\\\\
+Proof is on page 39 of Stewart and TRall!
+\end{remark}

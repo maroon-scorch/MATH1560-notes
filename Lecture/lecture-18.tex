@@ -1,0 +1,72 @@
+\section{Lecture April 14th}
+
+Recall that last time we
+\begin{itemize}
+    \item Defined fractional ideals
+    \item Defined the inverse of an integral ideal (and that the same definition holds for fractional ideal - with the exception of the zero ideal, which is fractional but not invertible)
+    \item Briefly stated the definition of a Dedekind Domain
+\end{itemize}
+
+\begin{theorem}[pg. 109 - S + T]
+The ring of integers $\mathcal{O}_K$:
+\begin{itemize}
+    \item a) is an integral domain
+    \item b) is Noetherian (every ascending chain of ideals terminates, or equivalently every ideal is finitely generated)
+    \item c) The ring of integers is integrally closed in its field of fractions, meaning if $\alpha \in Frac(\mathcal{O}_K) = K$ satisfies a monic polynomial equation with coefficients in $\mathcal{O}_K$, then $\alpha \in \mathcal{O}_K$.
+    \item d) Every non-zero prime ideal of $\mathcal{O}_K$ is maximal.
+\end{itemize}
+We also note that a ring satisfying $(a) - (d)$ is known as a Dedekind Domain.
+\end{theorem}
+
+\begin{proof}
+(a) is obvious, (c) was noted in a previous lecture.\\\\
+For (b), we know that if $[K: \Qbb] = n$, then $\mathcal{O}_K$ is a free $\Zbb$-module of rank $n$ (ie. $\mathcal{O}_K$ is a free abelian group of a rank $n$).\\\\
+If $\afrak$ is an ideal of $\mathcal{O}_K$, then $(\afrak, +)$ is free abelian of rank less than or equal to $n$ (See. Theorem 1.16 of S + T) So in other words, $(\afrak, +)$ is finitely generated as an $\mathcal{O}_K$ module (since $\Zbb \subset \mathcal{O}_K$, so every ideal of $\mathcal{O}_K$ is finitely generated with respect to $\mathcal{O}_K$.\\\\
+For (d), let $\pfrak$ be a non-zero prime ideal of $\mathcal{O}_K$. Let $0 \neq \alpha \in \pfrak$. Then consider $N := N_{K/\Qbb}(\alpha) = \alpha_1 ... \alpha_n$, where $\alpha_1, ..., \alpha_n$ are conjugates of $\alpha$ and define $\alpha_1 = \alpha$.\\\\
+We note that $N(\alpha) \in \Qbb$ since its fixed by all the filed embeddings. Moreover, $\alpha_2 ... \alpha_n = \frac{N(\alpha)}{\alpha} \in K$. In fact, $\alpha_2\alpha_3...\alpha_n \in \mathcal{O}_K$.\\\\
+Thus, we have that $N(\alpha) \in \pfrak$ since $\pfrak$ is an ideal.\\\\
+Thus $N(\alpha) \cdot \mathcal{O}_K \subset \pfrak$, which means that
+\[\mathcal{O}_K/\pfrak \text{ is a quotient of } \mathcal{O}_K/N \mathcal{O}_K\]
+Now, $\mathcal{O}_K/N \mathcal{O}_K$ is a finitely generated abelian group where every element has finite order (add it N times, goes to 0), so in particular $\mathcal{O}_K/N \mathcal{O}_K$ is a finite group.\\\\
+Hence we have that $\mathcal{O}_K/\pfrak$ is finite group. Since $\pfrak$ is prime, $\mathcal{O}_K/\pfrak$ is an integral domain. But we know that any finite integral domain is in fact a field, so this means that $\pfrak$ is actually a maximal ideal.
+\end{proof}
+
+\begin{proposition}[pg. 112 S + T - Existence Claim]
+Every non-zero ideal $\afrak \subset \mathcal{O}_K$ is a product of prime ideals.
+\end{proposition}
+
+\begin{proof}
+Suppose not, then let $\afrak$ be a maximal element of the set of ideals of $\afrak$ that is NOT a product of prime ideals. Why does this exist?\\\\
+Recall Zorn's Lemma: In a poset where every chain has an upperbound that's also in the poset, there's at least 1 maximal element in said poset.\\\\
+The Noetherian property of $\mathcal{O}_K$ tells us every chain has an upperbound in that poset (some finite termination), so Zorn's Lemma gives us this maximal element.\\\\
+Certainly $\afrak$ itself is not a prime ideal, but applying Zorn's Lemma to the poset of proper ideals containing $\afrak$ to conclude that $\afrak \subset \pfrak$ for some maximal ideal $\pfrak$, which is prime.\\\\
+We have that $\mathcal{O}_K \subsetneq \pfrak^{-1} \subset \afrak^{-1}$ since inverses of integral ideals is inclusion reversing and $\afrak \subset \pfrak \subset \mathcal{O}_K$. (We note it respects proper containment since you can also take an inverse back)\\\\
+It follows that 
+\[\afrak \subsetneq \afrak \pfrak^{-1} \subset \afrak \afrak^{-1} = \mathcal{O}_K\ (*)\]
+By the maximality of $\afrak$, we know that $\afrak \pfrak^{-1}$ is a product of prime ideals, but this means that
+\[\afrak \pfrak^{-1} = \pfrak_2 ... \pfrak_r\]
+, where $\pfrak_2, ..., \pfrak_r$ are prime, but then we have that
+\[\afrak = \pfrak \pfrak_2 ... \pfrak_r\]
+is a product of prime ideals, hence a contradiction.
+\end{proof}
+
+\begin{lemma}[pg. 113 S+T]
+For ideals $\afrak, \bfrak$ of $\mathcal{O}_K$ (or more generally a Dedekind Domain), we have that 
+\[\afrak | \bfrak \iff \afrak \supseteq \bfrak\]
+(Note we say $\afrak | \bfrak$ if there exist an ideal $C$ such that $\bfrak = C \afrak$)
+\end{lemma}
+
+\begin{proof}
+Suppose $\afrak | \bfrak$, clearly $\bfrak = C \afrak \subseteq \afrak$. Conversely, suppose that $\bfrak \subseteq \afrak$. Now let $\bfrak = \afrak(\afrak^{-1} \bfrak)$, where $\afrak^{-1} \bfrak$ is integral since $\afrak^{-1} \bfrak \subset \afrak^{-1} \afrak = \mathcal{O}_K$.
+\end{proof}
+
+\begin{theorem}[pg. 112]
+Every nonzero ideal of $\mathcal{O}_K$ has a unique factorization as product of prime ideals.
+\end{theorem}
+
+\begin{proof}
+The lemma above tells us that $\pfrak$ is prime if and only if $\pfrak | \afrak \bfrak \implies \pfrak | \afrak$ or $\pfrak | \bfrak$ (specifcally if helps the forward direction).\\\\
+Suppose $\afrak = \pfrak_1 ... \pfrak_r = \qfrak_1 ... \qfrak_s$, as product of prime ideals (not necessarily distinct).\\\\
+Then $\pfrak_1$ divides one of $\qfrak_j$ for some $j$, so since $\qfrak_j$ is maximal in $\mathcal{O}_K$, we have that $\pfrak_1 = \qfrak_j$.\\\\
+Now we can go down the list from $1, ..., r$ because we can get rid of the previous $\pfrak_i$ using $\pfrak_i^{-1}$, and repeating the process tells us that this factorization is unique.
+\end{proof}

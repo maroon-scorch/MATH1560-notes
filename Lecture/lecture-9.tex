@@ -1,0 +1,113 @@
+\section{Lecture 9 - March 3rd}
+
+\subsection{Quadratic Residues Continued; Quadratic Reciprocity}
+
+{\bf Proof of Proposition 5.1.2 last lecture}
+
+\begin{proof}
+Part (c) is clearly obvious.\\\\
+For (a), WLOG $a$ is not divisible by $p$, then by Fermat's Little Theorem
+\[a^{p-1} \equiv 1\ mod\ p\]
+Since $p-1$ is even this is the same as saying
+\[(a^{(p-1)/2} + 1)(a^{(p-1)/2} - 1) \equiv 0\ mod\ p\]
+Since $\Zbb/p\Zbb$ is an integral domain, we have that
+\[a^{(p-1)/2} \equiv \pm 1\ (mod\ p)\]
+We know from last lecture that
+\[a^{(p-1)/2} \equiv 1\ (mod\ p) \iff a \text{ is a quadratic residue mod p}\]
+For (b), Part (a) tells us
+\[(\frac{ab}{p}) \cong (ab)^{(p-1)/2} \equiv a^{(p-1)/2} b^{(p-1)/2} = (\frac{a}{p})(\frac{b}{p})\]
+\end{proof}
+
+\begin{corollary}
+There are some immediate corollaries to the proposition above:
+\begin{itemize}
+    \item 1) There are exactly $\frac{p-1}{2}$ quadratic residues modulo $p$ and $\frac{p-1}{2}$ quadratic non-residues modulo $p$. (Just realize them as roots of $x^{(p-1)/2} - 1$
+    \item 2) The product of two residues is a residue, the product of a residue and a non-residue is a non-residue, and the product of a non-residue and a non-residue is a residue. (We also note that this means the quadratic residues form a group)
+    \item 3) If $g$ is a primitive root modulo $p$, then
+    \[(\frac{g^i}{p}) = (-1)^i\]
+    This follows directly from the fact that a primitive root is not a quadratic residue and multiplicativity
+    \item 4) $(\frac{-1}{p}) = (-1)^{(p-1)/2}$. This is called the ``First Supplemental Law of Quadratic Reciprocity"
+\end{itemize}
+\end{corollary}
+
+We will now discuss a characterization of the Legendre symbol due to Gauss.
+
+\begin{definition}
+For $p$ a positive odd prime, the set 
+\[S = \{-\frac{(p-1)}{2}, -\frac{(p-3)}{2}, ..., -1, 1, 2, ..., \frac{p-1}{2}\}\]
+is called the \textit{set of least residues mod p}. (We skipped $0$).\\\\
+Let $a \in \Zbb$ such that $p \nmid a$. Let $\mu$ be the number of negative least residues of the integers $a, 2a, ..., (\frac{p-1}{2})a$.\\\\
+(eg. if $p = 7$ and $a = 4$, then $\frac{p-1}{2} = 3$ and $1 \cdot 4, 2 \cdot 4, 3 \cdot 4 \equiv -3, 1, -2\ (mod\ 7)$. Thus $\mu = 2$ since there are 2 negatives.)
+\end{definition}
+
+\begin{lemma}[Gauss's Lemma]
+Let $p \in \Zbb_+$ be an odd prime, and let $a \in \Zbb$ such that $p \nmid a$. Then
+\[(\frac{a}{p}) = (-1)^\mu\]
+\end{lemma}
+
+\begin{proof}
+It is convenient for us to write
+\[P = \{1, 2, ..., \frac{p-1}{2}\}, N = \{-1, -2, ..., \frac{-(p-1)}{2}\}\]
+Then $\mu = |aP \cap N|$ - ie. how many elements of P are modulo equivalent to something in $N$.\\\\
+If $x, y \in P$ with $x \neq y$, then $ax \neq \pm ay\ mod\ p$. For otherwise, \[x = \pm y\ mod\ p\]
+, which is impossible since $x$ and $y$ are distinct elements of $P$. Thus $aP = \{e_i \cdot i | i \in 1:(p-1)/2\}$, for some $e_i = \pm 1$.\\\\
+Now we mimic the elementary proof of Euler's Theorem
+\[(a^{(p-1)/2} \cdot (\frac{p-1}{2})! \equiv (\prod_{i = 1}^{(p-1)/2} e_i) \cdot (\frac{p-1}{2})!\]
+The factorials are units then we have that
+\[a^{(p-1)/2} \equiv \prod_{i=1}^{(p-1)/2} e_i = (-1)^{\mu}\]
+, since $\mu = |aP \cap N|$ Applying Euler's Criterion finishes the proof.
+\end{proof}
+
+\begin{proposition}[Second Supplemental Law of Quadratic Reciprocity (5.1.3)]
+For $p$ a positive odd prime, 
+\[(\frac{2}{p}) = (-1)^{(p^2 - 1)/8}\]
+, we note that intuition comes from
+\[\frac{(p^2 - 1)}{8} = \frac{p+1}{2} \cdot \frac{p-1}{4}\]
+We note that $\frac{(p^2 - 1)}{8} = \frac{p+1}{2} \cdot \frac{p-1}{4}$ means one of them is divisible by 2 and not by 4 and the other is divisble by 4.\\\\
+It follows that 
+\[(\frac{2}{p}) = \begin{cases}
+1, \text{ when } p = \pm 1\ mod\ 8\\
+01, \text{ when } p = \pm 3\ mod\ 8
+\end{cases}\]
+\end{proposition}
+
+\begin{proof}
+We apply Gauss's Lemma with $a = 2$, then
+\[2P = \{2, 4, 6, ..., p - 1\}\]
+First suppose that $p \equiv 1\ mod\ 4$, then $\frac{p-1}{2}$ is even, so in fact
+\[2P = \{2, 4, ..., \frac{p-1}{2}, \frac{p+3}{2}, ..., p -1\}\]
+All elements starting at $\frac{p+3}{2}$ are in $N$, that's exactly $\frac{p-1}{4}$ in $N$. And the first $\frac{p-1}{4}$ elements are in $P$.\\\\
+So we conclude that $\mu = \frac{p-1}{4}$, so Gauss's Lemma gives us that
+\[(\frac{2}{p}) = (-1)^{(p-1)/4}\]
+Since $p \equiv 1\ mod\ 4$, then $(p+1)/2$ is odd, and so we have that
+\[(\frac{2}{p}) = (-1)^{(p^2-1)/8}\]
+Now suppose $p \equiv 3\ mod\ 4$, then we have that
+\[2P = \{2, 4, ..., \frac{p-3}{2}, \frac{p+1}{2}, ..., p-1\}\]
+, since $\frac{p-1}{2}$ is odd. The first $\frac{p-3}{4}$ elements are in $P$ and the last $\frac{p+1}{4}$ elements are in $N$, so we have that
+\[(\frac{2}{p}) = (-1)^{(p+1)/4}\]
+Since $(p-1)/2$ is odd, this means that
+\[(\frac{2}{p}) = (-1)^{(p^2-1)/8}\]
+\end{proof}
+
+\begin{theorem}[The Law of Quadratic Reciprocity]
+Let $p, q \in \Zbb_+$ be distinct odd primes. Then 
+\[(\frac{p}{q}) \cdot (\frac{q}{p}) = (-1)^{\frac{p-1}{2} \cdot \frac{q-1}{2}}\]
+In other words, $(\frac{p}{q}) = (\frac{q}{p})$ if and only if at least one of $p, q$ is congruent to $1\ mod\ 4$.
+\end{theorem}
+
+\begin{example}
+Which odd primes $p \in \Zbb_+$ have $3$ as a quadratic residue?\\\\
+Suppose $p \equiv 1(4)$. Then,
+\[(\frac{3}{p}) = (\frac{p}{3}) = \begin{cases}
+1 \text{ if $p \equiv 1(3)$}\\
+-1 \text{ if $p \equiv 1(4)$}
+\end{cases}\]
+Thus $p \equiv 1(12)$ gives $(\frac{3}{p}) = 1$ and $p \equiv 5(12)$ (this corresonds to 1(4) and -1(3)) gives $(\frac{3}{p}) \equiv -1$. $5$ and $12$ came from the CRT.\\\\
+Now suppose $p \equiv 3\ mod\ 4$, then
+\[(\frac{3}{p}) = -(\frac{p}{3}) = \begin{cases}
+1 \text{ if $p \equiv -1(3)$}\\
+-1 \text{ if $p \equiv 1(3)$}
+\end{cases}\]
+Altogether, $p \equiv 11\ mod\ 12$ gives $(\frac{3}{p}) = 1$, and $p \equiv 7\ mod\ 12$ gives $(\frac{3}{p}) = -1$, $11$ and $7$ came from the CRT.\\\\
+We conclude that $(\frac{3}{p}) = 1$ if and only if $p = \pm 1\ (mod\ 12)$
+\end{example}

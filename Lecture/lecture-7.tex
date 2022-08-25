@@ -1,0 +1,152 @@
+\section{Lecture 7 (February 17th) - Special Integers:}
+
+\subsection{Fermat and Mersenne primes}
+\begin{example}
+Many small primes are of the form $2^m \pm 1$ for some natural number $m$, eg.
+\[3, 5, 7, 17, 31\]
+We deal with the $+1$ and $-1$ cases separately.
+\end{example}
+
+\begin{lemma}
+If $2^m + 1$ is prime, then $m = 2^n$ for some $n \geq 0$
+\end{lemma}
+
+\begin{proof}
+We will prove using the contrapositive. Suppose that $m$ is not a power of 2, then $2^m + 1$ cannot be prime.\\\\
+Since $m$ is not a power of 2, we can write $m$ as $m = 2^n \cdot q$, for some odd $q > 1$.\\\\
+Consider the polynomial
+\[f(t) = t^q + 1\]
+Clearly $t = -1$ is a root of $f(t)$ as $q$ is odd, so
+\[f(t) = (t + 1)g(t)\]
+, where $deg(f) = q > 1$.\\\\
+Consider when $x^m + 1 = f(x^{2n})$, then
+\[x^m + 1 = f(x^{2n}) = (x^{2n} + 1)(g(x^{2n}),\ m > 2^n\]
+When $x = 2$, then we are done, where $2^{2^n} + 1\ |\ 2^m + 1$
+\end{proof}
+
+\begin{definition}
+Numbers of the form $2^{2^n} + 1$ are called \textit{Fermat Numbers}. Fermat Numbers that are also prime are called \textit{Fermat Primes}.
+\end{definition}
+
+\begin{example}
+The first few Fermat Numbers happen to be prime:
+\[3, 5, 17, 257, 65537\]
+Fermat conjectured that all Fermat Numbers are primes, in fact the 5 numbers shown here were the only numbers he was able to confirm is prime.\\\\
+Euler managaed to compute $2^{2^5} + 1$ and showed that $641$ divides said number.\\\\
+So far no Fermat Numbers after the 5th Fermat number is prime.
+\end{example}
+
+\begin{lemma}
+If $m > 1$, $a \geq 2$, and $a^m - 1$ is prime, then $a = 2$, and $m$ has to be prime.
+\end{lemma}
+
+\begin{proof}
+Suppose $m$ is composite, so $m = n \cdot k$, $1 < n, k < m$. Then we have that
+\[a^m - 1 = (a^k)^n - 1 = (a^k - 1)(a^{k(n-1)} + .... + 1)\]
+Since $a$ is at least 2, so we have a proper divisor.\\\\
+Therefore, $m$ has to be prime.\\\\
+Now if $a > 2$, then $a^m - 1 = (a - 1)(a^{m - 1} + ... + 1)$. This factorization is only trivial when $a = 2$.
+\end{proof}
+
+\begin{definition}
+Integers of the form $2^p - 1$ where $p$ is a prime are called \textit{Mersenne numbers}. \textit{Mersenne numbers} that are prime are called \textit{Mersenne primes}.
+\end{definition}
+
+\begin{remark}
+Mersenne was a contemporary of Fermat's. We currently have 51 Mersenne primes, and we are unclear that whether or not there's an infinite number of Mersenne primes.\\\\
+The largest Mersenne prime known so far (also the largest known prime) is:
+\[2^{82,589,933} - 1\]
+\end{remark}
+
+\begin{definition}
+$n \in \Zbb_+$ is perfect if
+\[n = \sum_{d | n, d < n} d\]
+\end{definition}
+
+\begin{proposition}
+If $n = 2^{p-1}(2^{p} - 1)$ where $p \in \Zbb_+$, $p$ is prime and $2^{p} - 1$ is prime, then $n$ is perfect.
+\end{proposition}
+
+\begin{proof}
+The function $\sigma(n) = \sum_{d | n} d$ is a multiplicative function.\\\\
+So if $n = 2^{p-1}(2^p - 1)$, then $\sigma(n) = \sigma(2^{p-1})\sigma(2^p-1)$ as they are coprime.\\\\
+Then $\sigma(2^{p-1}) = \frac{2^p-1}{2-1} = 2^{p} - 1$,\\\\
+Then $\sigma(2^{p} - 1) = 2^{p}$ as $2^{p} - 1$ is prime.\\\\
+So we have that $\sigma(n) = 2n$, so we are done.
+\end{proof}
+
+\begin{proposition}
+If $n \in \Zbb_+$ is an even perfect number, then $n = 2^{p-1}(2^p-1)$ where $p$ and $2^p-1$ are both prime.
+\end{proposition}
+
+\begin{proof}
+The proof is trivial and is left as an exercise for the reader.
+\end{proof}
+
+\begin{theorem}[Euclid-Euler Theorem]
+The even perfect numbers are in bijective correspondence to the Mersenne primes. Specifically, for any Mersenne prime $2^p - 1$, the map
+\[2^p-1 \mapsto 2^{p-1}(2^p-1)\]
+is the desired bijection.
+\end{theorem}
+
+\subsection{Pseudoprimes and Carmichael Numbers}
+
+\begin{theorem}[Wilson's Theorem]
+If $p$ is a prime, then
+\[(p - 1)! \equiv -1\ (mod\ p)\]
+\end{theorem}
+
+\begin{proposition}
+The converse of Wilson's Theorem is also true: if $n$ is a positive integer such that $n \geq 2$ and
+\[(n - 1)! \equiv -1\ (mod\ n)\ \ (*)\]
+Then $n$ is prime.
+\end{proposition}
+
+\begin{remark}
+You can think of $(*)$ as a rudimentary primality test. It is not a great primality test, but it does give an explicit formula for primes
+\[f(n) = \lfloor \frac{n!\ mod(n+1)}{n}\rfloor (n-1) + 2\]
+We can also improve the test here.\\\\
+Recall Fermat's Little Theorem: If $p \in \Zbb_+$ is prime and $a \in \Zbb$ is an integers, then
+\[a^p \equiv a\ (mod\ p)\]
+Thus take $n \in \Zbb_+$, if 
+\[a^n \not \equiv a\ (mod\ n)\]
+for some $a \in \Zbb_+$, then $n$ is composite.\\\\
+Example,
+\[2^n \not \equiv 2\ (mod\ n) \implies n \text{ is composite}\]
+\end{remark}
+
+\begin{example}
+The converse of said test is unfortunately not true.\\\\
+\[2^10 = 1024 \equiv 1\ (mod\ 341)\]
+So $2^{341} = 2^{10}^{34} \cdot 2 \equic 2\ mod\ 341$.\\\\
+But $341 = 11 \cdot 31$ and is thus compositie.\\\\
+We say that $341$ is a pseudo-prime base 2.
+\end{example}
+
+\begin{definition}
+We call $n$ a {\bf pseudo-prime} to the base $a$ if $n$ is composite and happens to satisfy
+\[a^n \equiv a\ (mod\ n)\]
+\end{definition}
+
+\begin{remark}
+Sadly, it is not true that every composite $n$ is a pseudo-prime base $a$ for all $a \in \Zbb$. The smallest composite number that is a pseudo-prime base $a$ for all $a \in \Zbb$ is $561$.
+\end{remark}
+
+\begin{definition}
+A positive integer $n$ is called a {\bf Carmichael number} if $n$ is composite, and
+\[a^n \equiv a\ (mod\ n), \forall a \in \Zbb\]
+\end{definition}
+
+\begin{proposition}
+If a composite $n$ is not a Carmichael number, then at least half of the congruence classes $a \in (\Zbb/n\Zbb)^\times$ are such that $n$ is not a pseudo-prime to base $a$.
+\end{proposition}
+
+\begin{proof}
+Suppose $n$ is a pseudo-prime to the base $a_1, a_2, ..., a_r \in (\Zbb/n\Zbb)^\times$, and suppose there exist $a$ such that ($a$ exists since $n$ is not a Carmichael Number):
+\[a^n \equiv a\ (mod\ n)\]
+Then for all $i$, 
+\[(a \cdot a_i)^{n-1} = a^{n-1}a_i^{n-1} \equiv a^{n-1}\ mod(n) \nequiv 1\ mod(n)\]
+Where in last inequality holds because if they do equal then $a^n \equiv\ a\ (mod(n))$prime, which gives a contradiction.\\\\
+This means that $n$ is not a pseudo-prime to the bases
+\[a \cdot a_1, a \cdot a_2, ..., a \cdot a_r\]
+\end{proof}

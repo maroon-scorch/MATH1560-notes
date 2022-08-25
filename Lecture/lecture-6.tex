@@ -1,0 +1,98 @@
+\section{Lecture 6 (February 15th)}
+
+\begin{theorem}
+Suppose $p \in \Zbb_+$ is an odd prime, and let $e \geq 1$, then $U(p^c)$ is cyclic, where $U(n)$ denotes the multiplicative group of units modulo to $n$.
+\end{theorem}
+
+\noindent There are 3 steps that we would like to show:
+\begin{itemize}
+    \item 1. Pick a primitive root $mod\ p$, call it $g$ (proved last lecture)
+    \item 2. Show that either $g$ or $g + p$ is a primitive root mod $p^2$.
+    \item 3. If you take any primitive root mod $p^2$, call it $h$, then $h$ is also a primitive root mod $p^e$, for all $e \geq 2$.
+\end{itemize}
+
+{\bf Proof of Step 2}
+\begin{proof}
+Let $g$ be a primitive root module $p$, and let $d$ be the order of $g\ mod(p^2)$.\\\\
+Since $\phi(p^2) = p(p-1)$, that is the order of this multiplicative group, we have that $d | p(p-1)$ by Lagrange's Theorem.\\\\
+We know by definition of $d$,
+\[g^d \equiv 1\ mod(p^2)\]
+so
+\[g^d \equiv 1\ mod(p)\]
+Since $g$ is a primitive root of modulo $p$, so $(p - 1) | d$, so altogehter, either $d = p - 1$ or $d = p(p-1)$.\\\\
+If $d = p(p - 1)$, then we are done.\\\\
+If $d = p - 1$, Let $h = g + p$, since $h$ is in the same modulo class as $g$, $h$ is also a primitive root.\\\\
+Now clearly $(g + p)^{p - 1} \neq 1$ $mod(p^2)$, since
+\[g^{p-1} \equiv 1(p^2)\]
+And using the binomial theorem
+\begin{align*}
+    h^{p - 1} &= g^{p - 1} + (p - 1)g^{p - 2}p + ... + p^{p - 1}\\
+    &\equiv 1 - pg^{p - 2}
+\end{align*}
+Since $p \nmid g$, so $pg^{p - 2}$ is not 0.\\\\
+So the order of $g + p$ has to be $p(p-1)$.
+\end{proof}
+
+{\bf Proof of Step 3:}
+A primitive root mod $p^2$ is a primitive root mod $p^e$, $e \geq 2$.
+\begin{proof}
+We will prove this with induction on $e$.\\\\
+When $e = 1$, then we already proved this in Step 2.\\\\
+Now suppose our inductive hypothesis is still true until $e = k$, then we wish to show that this is also true for $e = k + 1$.\\\\
+Let $d$ be the order of a primitive root of $h$ from $p^e$ for $mod(p^{e+1})$. Then clearly $d | \phi(p^{e+1}) = p^e(p-1)$.\\\\
+We also have that $p^{e-1}(p - 1) | d$.\\\\
+Thus, there are only two choices for $d$.\\\\
+If $d = p^{e-1}(p - 1)$, then we are done.\\\\
+Otherwise, let $d = p^{e-1}(p - 1)$, then we wish to show that
+\[h^{p^{e-1}(p-1)} \neq 1\ (mod\ p^{e+1})\]
+Since $h$ has order $\phi(p^e) = p^{e-1}(p - 1)$ in $U(p^e)$, then
+\[h^{p^{e-2}(p - 1)} \neq 1\ (p^e)\ (*)\]
+However, by Euler's Theorem
+\[h^{p^{e - 2}(p-1)} \equiv 1\ (p^{e-1})\ (**)\]
+Conbining $(*)$ and $(**)$ gives us that
+\[h^{p^{e-2}(p-1)} = 1 + kp^{e-1}, p \nmid k\]
+By the Binomial Theorem
+\begin{align*}
+    h^{p^{e-1}(p-1)} &= (1 + kp^{e-1})^p\\
+    &=  1 + pkp^{e-1} + {p \choose 2}k^2p^{2e-2} + ...
+\end{align*}
+We note that subsequent terms are all divisible by $p^{3(e-3)} = (p^(e-1))^3$, and hence by $p^{e+1}$ since $e > 2$ as
+\[3(e - 1) \geq e + 1, \forall e \geq 2\]
+So we have that
+\begin{align*}
+    h^{p^{e-1}(p-1)} &\equiv 1 + kp^e + \frac{1}{2}k^2p^{2e-1}(p-1)\ mod(p^{e+1})\\
+\end{align*}
+It is crucial that $p$ is odd, because as a result we have that
+\[k^2p^{2e - 1}(p - 1)/2 \text{ is divisible by } p^{e+1}\]
+since $2e - 1 \geq e + 1$ for all $e \geq 2$.\\\\
+Thus,
+\begin{align*}
+    h^{p^{e-1}(p-1)} &\equiv 1 + kp^e\ mod(p^{e+1})\\
+    &\neq 1\ mod(p^{e+1})
+\end{align*}
+Hence a contradiction, so $h$ is a primitive root mod $p^{e+1}$
+\end{proof}
+
+\begin{remark}
+The number of generators for a unit group of modulo $p^k$ for odd prime is just $\phi(\phi(p^k))$. Now, what exactly is $\phi(\phi(p^k))$, this would give us the intuition for the proof above (supposedly).
+\end{remark}
+
+\begin{theorem}
+$U(2^e)$ is cyclic if and only if $e = 1$ or $e = 2$.
+\end{theorem}
+
+\begin{proof}
+Suppose $U(2^e)$ is cyclic, and assume for the sake of contradiction that $e > 2$.\\\\
+It suffices to show that the group of units mod(8) is not cyclic, since for any group greater, we can always project it down to $U(8)$, then we see that $U(8)$ is isomorphic to $\Zbb_2 \times \Zbb_2$.\\\\
+Conversely, when $e = 1$, $e= 2$, we can verify this.
+\end{proof}
+
+
+\begin{corollary}
+$U(m)$ is cyclic if and only if $m = 1, 2, 4, p^e$ or $2p^e$, for some odd prime $p$.
+\end{corollary}
+
+\begin{proof}
+Recall that a product $G$ of finite cyclic groups $G_1$ and $G_2$ is cyclic if and only if $(|G_1|, |G_2|) = 1$.\\\\
+We first note that $\phi(m)$ is even for all $m \geq 3$, so $U(m)$ is cyclic if and only if $m = p_1^{e_1}...p_k^{e_k}$ and $\phi(p_1)^{e_1}, ..., \phi(p_k)^{e_k}$ are coprime, but this can only happen in the 5 cases given above.
+\end{proof}

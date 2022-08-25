@@ -1,0 +1,215 @@
+\section{Lecture 4 (February 8)}
+\subsection{Dirichlet Convolution}
+\begin{definition}[Dirichlet Convolution]
+Let $f, g$ are arithmetic functions. Then the Dirichlet Product/Convolution of f and g is
+\begin{align*}
+    (f * g)(n) &= \sum_{d_1d_2 = n} f(d_1)g(d_2)\\
+    &= \sum_{d | n} f(d)g(n/d)
+\end{align*}
+\end{definition}
+
+\begin{remark}
+Note that $(f * g)(n)$ is also an arithmetic function, and note that it is clearly commutative.
+\end{remark}
+
+\begin{proposition}
+The Dirichlet Convolution is associative.
+\end{proposition}
+
+\begin{proof}
+Let $f, g, h$ be arithmetic functions
+\begin{align*}
+    (f * g) * h(n) &= \sum_{d_1d_2d_3 = n} f(d_1)g(d_2)h(d_3)\\
+    &= f * (g * h)(n)
+\end{align*}
+\end{proof}
+
+\begin{definition}[Multiplicative Identity of Dirichlet Convolution]
+Let $I: \mathbb{Z}_+ \to \{0, 1\}$ be given by $I(n) = 1$ if $n = 1$, $I(n) = 0$, otherwise.\\\\
+Then clearly for any arithmeitc function $I$,
+\begin{align*}
+    (f * I)(n) &= \sum_{d_1d_2 = n} f(d_1)I(d_2)\\
+    &= f(n)I(n)\\
+    &= f(n)
+\end{align*}
+The other way works similarly.
+\end{definition}
+
+\begin{lemma}
+If $f$ is an arithmetic function with $f(1) \neq 0$, then there exists an arithmetic function $g$ such that
+\[f * g = I = g * f\]
+\end{lemma}
+
+\begin{proof}
+By Commutativity, we only have to show one side.\\\\
+We will define $g$ recursively as
+\[ g(n) = \begin{cases} 
+      g(1) = 1 \\
+      g(n) = \frac{-1}{f(1)} \sum_{d | n, d < n} g(d)f(n/d)
+   \end{cases}
+\]
+Then we can see that $(f * g)(1) = f(1) \cdot g(1) = 1$.\\\\
+For all $n > 1$, we have that
+\begin{align*}
+    \sum_{d | n} g(d)f(n/d) &= g(n)f(1) + \frac{-1}{f(1)} \sum_{d | n, d < n} g(d)f(n/d)\\
+    &= \frac{-f(1)}{f(1)} \sum_{d |n , d< n} g(d) f(n/d) + \sum_{d | n, d < n} g(d)f(n/d) \tag*{Rewrite $g(n)$ with its reucrsive definition}\\
+    &= 0
+\end{align*}
+\end{proof}
+
+\begin{remark}
+This means that the set of all arithmetic functions $f$ where $f(1) \neq 0$ form an Abelian Group with the Dirichlet Convolution as its operation.
+\end{remark}
+
+\subsection{Mobius Function}
+
+\begin{definition}
+Let $\mu: \Zbb_+ \to \{-1, 0, 1\}$ be given by
+\[\mu(n) = \begin{cases}
+(-1)^k, \text{if $n = p_1...p_k$, $p_i$ are distinct primes}
+0, \text{otherwise}
+\end{cases}\]
+Note that we vacuously have that $\mu(1) = 1$.
+\end{definition}
+
+\begin{lemma}
+$\mu$ is a multiplicative function.
+\end{lemma}
+
+\begin{proof}
+Let $m, n  \in \mathbb{Z}_+$ with $(m, n) = 1$, then
+\[m = p_1^{e_1}...p_k^{e_k}\]
+\[n = q_1^{f_1}...q_l^{f_l}\]
+If either $m$ or $n$ is not square-free, then clearly
+\[\mu(mn) = \mu(m)\mu(n) = 0\]
+Otherwise, suppose both $m$ and $n$ are square-free, then
+\[m = p_1...p_k, n = q_1...q_l\]
+, all distinct primes. Since $(m, n) = 1$, we also know that $(p_i, q_j) = 1$ for all choices. Then clearly
+\[\mu(mn) = (-1)^{k + l} = \mu(m)\mu(n)\]
+\end{proof}
+
+\begin{lemma}
+Consider the summatory function of $\mu$, then
+\[f(n) = \sum_{d | n} \mu(d) = 0\]
+for all $n \geq 2$
+\end{lemma}
+
+\begin{proof}
+Since $\mu$ is multiplicative, then $f(n)$ is multiplicative. Now for any $n \geq 2$, so it suffices for us to check prime powers, indeed,
+\[f(p^e) = \mu(1) + \mu(p) + ... + \mu(p^e) = \mu(1) + \mu(p) = 1 - 1 = 0\]
+\end{proof}
+
+\begin{definition}
+Let $i: \mathbb{Z}_+ \to \{1\}$ be the constant $1$ function.
+\end{definition}
+
+\begin{lemma}
+i the multiplicative inverse of $\mu$:
+\[i * \mu = \mu * i = I\]
+\end{lemma}
+
+\begin{proof}
+Clearly $(\mu * i)(1) = \mu(1) \cdot i(1) = 1$.\\\\
+For $n > 1$, we have that
+\[(i * \mu)(n) = \sum_{d | n} \mu(d) = 0\]
+by the previous lemma.
+\end{proof}
+
+\begin{remark}[Summatory Functions as Convolutions]
+We can turn a summatory function into a Dirichlet product in the sense that if $F(n) = \sum_{d | n} f(d)$, then $F = f * i$.
+\end{remark}
+
+\begin{remark}
+If $f, g$ are multiplicative, then so is $f * g$. The proof is left as an exercise for the reader.
+\end{remark}
+
+\begin{theorem}[Mobius Inversion]
+Let $F(n) = \sum_{d | n} f(d)$, then
+\[f(n) = \sum_{d | n} \mu(d)F(n / d) = \mu * F\]
+\end{theorem}
+
+\begin{proof}
+We take advantage of the fact that much of this is simplified by the language of abstract algebra since
+\[F * \mu = (f * i) * \mu = f * (i * \mu) = f * I = f\]
+\end{proof}
+
+\begin{corollary}
+If $F$ is the summatory function of $f$ and $F$ is multiplicative, then so is $f$
+\end{corollary}
+
+\begin{proof}
+Since Dirichlet Convolution preserves multiplicativity and both $F$ and $\mu$ are multiplicative, $F * \mu = f$ is thus multiplicative.
+\end{proof}
+
+\begin{corollary}
+This is another way to show that $\phi$ is multiplicative
+\end{corollary}
+
+\begin{proof}
+Since $F(n) = \sum_{d | n} \phi(d) = n$ is multiplicative, $\phi = F * \mu$ is multiplicative.
+\end{proof}
+
+\subsection{Applications of Mobius Inversion:}
+
+\begin{definition}
+The n-th cyclotomic polynomial $\Phi_n(x)$ is the unique irreducible polynomial in $\mathbb{Z}[x]$ dividing $x^n - 1$ but does not divide $x^k - 1$ for $k < n$, then we have that
+\[\Phi_n(x) = \prod_{1 \leq k \leq n, gcd(k, n) = 1} (x - e^{\frac{2\pi i k }{n}})\]
+So in other words, the $n$-th cyclotomic polynomial is the product of the linear factors with root being the n-th primitive roots of unity.
+\end{definition}
+
+\begin{proposition}
+\[\prod_{d | n} \Phi_d(x) = x^n - 1\]
+\end{proposition}
+
+\begin{proof}
+By Mobius Inversion, if $G(n) = \prod_{d | n} g(d)$, then
+\[g(n) = \prod_{d | n} G(d)^{\mu(n/ d)}\]
+Thus, when $G(n) = x^n - 1$, we have that
+\[g(n) = \prod_{d | n} (x^d - 1)^{\mu(n/d)}\]
+, where $\mu(n / d) = 1$ only at $d = n$, so
+\[g(n) = x^n - 1\]
+Thus, since $G(n) = x^n - 1$, we have that
+\[x^n - 1 = \prod_{d | n} g(d) = \prod_{d | n} (x^d - 1)\]
+\end{proof}
+
+{\bf Alternative Proof}
+\begin{proof}
+The set of roots of $x^n - 1$ form a cyclic group of order $n$, clearly each root of $\Phi_d(x)$ is also a root of $\Phi_n(x)$. Then intersection of roots of different order is empty, the union of all roots of each order dividing $n$ is the entire set of roots. Thus, the two has to equal.
+\end{proof}
+
+\begin{definition}[Dynatomic Polynomials]
+Dynatomic polynomials have as roots periodic points of a polynomial.\\\\
+Let K be a field, and let $f \in k[x]$ be of deg $d \geq 2$, let $f^n = f \circ ... \circ f$, f composed itself $n$ times.\\\\
+We say $p \in \overline{K}$ is periodic under $f$ if
+\[f^n(p) = p\]
+for some $n$.
+\end{definition}
+
+\begin{example}
+0 is a period point of $f(x) = x^2 - 1$, since $f(0) = -1$, $f(f(0)) = f(-1) = 0$.
+\end{example}
+
+\begin{definition}
+If $n$ is the smallest integer such that $f^n(p) = p$, then $p$ has \textit{exact period} n.
+\end{definition}
+
+\begin{definition}
+The $n$-th dynatomic polynomial of $f$ is
+\[\Phi_{f, n}(x) = \prod_{d | n} (f^d(x) - x)^{\mu(n/d)}\]
+and hence
+\[\prod_{d | n} \Phi_{f, n}(x) = f^n(x) - x\]
+\end{definition}
+
+\noindent We hope that $\Phi_{f, n}(x)$ have roots that exactly the points of exact period $n$. This is false
+
+\begin{example}
+Let $f(x) = x^2 - 3/4$, then $f(x) - x = (x - 3/2)(x + 1/2)$ has roots $3/2, -1/2$.\\\\
+Note that $f^2(x) - x = x^4 - 3/2x^2 - x = 3/16 = (x - 3/2)(x + 1/2)$, so we have that
+\[\frac{f^2(x) - x}{f(x) - x} = (x + 1/2)^2\]
+But $x = -1/2$ is a fixed point, hence a contradiction.
+\end{example}
+
+\begin{remark}
+For a degree 2 polynomial, generally it has 2 distinct points of exact period 2 and 2 more points distinct from the two prior that are fixed under f.\\\\
+Here, the 2 former points have collided into 1 fixed point.
+\end{remark}

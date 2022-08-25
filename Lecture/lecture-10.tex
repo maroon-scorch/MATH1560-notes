@@ -1,0 +1,122 @@
+\section{Lecture March 8th}
+
+\subsection{Proof of Quadratic Reciprocity}
+
+\begin{example}
+Determine if $219$ is a quadratic residue modulo $383$ (which is infact a prime number).\\\\
+Since $383$ is prime, this is the same as asking
+\[(\frac{219}{383}) = (\frac{3}{383}) \cdot (\frac{73}{383}) = \]
+, we note that both $3$ is $3\ mod 4$ and $73$ is $1\ mod 4$, so
+\[= -(\frac{383}{3}) (\frac{383}{73}) = -(\frac{2}{3}) \cdot (\frac{18}{73}) = (\frac{18}{73}) = (\frac{2}{23})\]
+By the second supplemental law of quadratic residues, we have that
+\[(\frac{2}{23}) = 1\]
+\end{example}
+
+\begin{remark}
+Note that we must factor the top argument before beginning to flip using Quadratic Reciprocity.
+\end{remark}
+
+\noindent Now we will finally prove Quadratic Reciprocity. We present a proof using Gauss's Lemma.
+
+\begin{theorem}
+For $p, q \in \Zbb_+$, distinct odd primes,
+\[(\frac{p}{q})(\frac{q}{p}) = (-1)^{\frac{(p-1)(q-1)}{4}}\]
+\end{theorem}
+
+\begin{proof}
+Let $P = \{1, 2, ..., \frac{p-1}{2}\}$, $N = -P - \{-1, -2, ..., -\frac{p-1}{2}\}$, $Q = \{1, 2, ..., \frac{q-1}{2}\}$.\\\\
+Write $\overline{P}, \overline{N}$ for $P\ mod\ p$ and $N\ mod\ p$ respectively, so that Gauss's Lemma gives us that
+\[(\frac{q}{p}) = (-1)^{\mu}\]
+, where $\mu = |q \overline{P} \cap \overline{N}|$.\\\\
+In other words, $\mu$ is exactly the number of $x \in P$ such that
+\[qx \equiv n\ mod\ p\]
+, for some $n \in N$, and hence this $\mu$ is the number of $x \in P$ such that for some $y \in \Zbb$, (n has to lie strictly between $-p/2$ and $0$)
+\[-\frac{p}{2} < qx - py < 0\]
+We now specify more precisely which $y$ can possibly satisfy this condition for some $x \in P$.\\\\
+Solving these two inequalities for $y$ gives
+\[\frac{qx}{p} < y < \frac{qx}{p} + \frac{1}{2}\]
+On the other hand, since $x \leq \frac{p-1}{2}$, for all $x \in P$, this means gives
+\[y < \frac{qx}{p} + \frac{1}{2} \leq \frac{q(p-1)}{2p} + \frac{1}{2}\]
+We note that $\frac{p-1}{p} < 1$, so
+\[y < \frac{q(p-1)}{2p} + \frac{1}{2} < \frac{q}{2} + \frac{1}{2} = \frac{q+1}{2}\]
+Thus we have that ($0 < y$ is implicit)
+\[0 < y < \frac{q-1}{2}\ (*)\]
+Since $y$ is an integer, we know that $y \in Q = \{1, 2, ..., \frac{q-1}{2}\}$.\\\\
+Thus, we've shown that $\mu$ is the number of ordered pairs
+\[(x, y) \in P \times Q,\ -\frac{p}{2} < qx - py < 0\]
+{\bf Now we will switch the roles of p and q}, then we also have that 
+\[(\frac{p}{q}) = (-1)^{n}\]
+, where $n$ is the number of pairs
+\[(y, x) \in Q \times P,\ -\frac{q}{2} < py - qx < 0\]
+, where we note the condition above is exactly the number of pairs
+\[(x, y) \in P \times Q, 0 < qx - py < \frac{q}{2}\]
+Then we see that
+\[(\frac{p}{q}) \cdot (\frac{q}{p}) = (-1)^{\mu + n}\]
+, so our question is, what is $\mu + n$.\\\\
+We note that the two conditions for $\mu$ and $n$ are mutually exclusive! So the number of $(x, y) \in P \times Q$ such that
+\[-\frac{p}{2} < qx - py < 0, \text{ or } 0 < qx - py < \frac{q}{2}\]
+is exactly $\mu + n$.\\\\
+We note that it is impossible for $qx - py = 0$ since if $qx = py$ then that would imply $x$ is at least $q$ and $y$ is at least $p$, but $Q < q$ and $P < p$, so our condition above simplifies to
+\[-\frac{p}{2} < qx - py < \frac{q}{2}\]
+, and the number of $(x, y)$ satisfying this is still $P \times Q$.\\\\
+Graphically, we are looking at the ordered pairs in a rectangular box $R = [1, p-1/2] \times [1, q-1/2]$ bounded by the two lines
+\[qx - py = -p/2, qx - py = q/2\].\\\\
+So we are counting the number of lattice points in $R$ bounded by the two lines, we will indicate $A, B$ as the complement of the shaded region in $R$.\\\\
+If $\alpha$ is the number of integer points in $A$ and $\beta$ be the number of integers points in $B$, then we have that
+\[\mu + n = (\frac{p-1}{2})(\frac{q-1}{2}) - (\alpha + \beta)\]
+As long as we show that the equation above agrees modulo 2, then we are good, so we want to show that $\alpha + \beta$ is 0 modulo 2.\\\\
+We will do this by showing that $\alpha = \beta$.\\\\
+Let $\rho$ be the rotation given by
+\[\rho(x, y) = (\frac{p+1}{2} - x, \frac{q+1}{2} - y)\]
+, we note that $(\frac{p+1}{4}, \frac{q+1}{4})$ is the center of this rotation as they are fixed, and we claim that $\rho(R) = R$ as in that the rotation maps R to itself, specifically $\rho(A) = B$, $\rho(B) = A$.\\\\
+To do the last part, let $\rho(x, y) = (x^\prime, y^\prime)$, one need to check 
+\[qx - py < \frac{-p}{2} \iff qx^\prime - py^\prime > \frac{q}{2}\]
+We omit the step, and this implies that
+\[\rho(A) = B, \rho(B) = A\]
+Clearly $\rho$ is a bijection and it preserves lattice points, so we have that $\alpha = \beta$.\\\\
+Thus, we have that
+\[\mu + n = \frac{(p-1)(q-1)}{4} - 2\alpha\]
+So we have that
+\[\mu + n \equiv \frac{(p-1)(q-1)}{4}\ (mod\ 2)\]
+\end{proof}
+
+\subsection{Jacobi Symbol}
+
+The Jacobi symbol generalizes the Legendre Symbol.
+
+\begin{definition}
+Let $b$ be an odd positive integer, and let $a$ be any integer. Write
+\[b = p_1p_2...p_m\]
+, where $p_1, ..., p_n$ are primes (not necessarily distinct).\\\\
+The symbol $(\frac{a}{b})$ defined by
+\[(\frac{a}{b}) = (\frac{a}{p_1})...(\frac{a}{p_m})\]
+is called the Jacobi Symbol. (The Legendre Symbol is a special case when $b$ is prime)
+\end{definition}
+
+\begin{proposition}[Basic Properties of Jacobi Symbol]
+A few basic properties
+\begin{itemize}
+    \item $(\frac{a_1a_2}{b}) = (\frac{a_1}{b})(\frac{a_2}{b})$ (Follows from Multiplicativity of the Legendre Symbol)
+    \item $(\frac{a}{b_1b_2} = (\frac{a}{b_1})(\frac{a}{b_2}))$ (Trivial from Definition)
+\end{itemize}
+So the Jacobi Symbol is totally multiplicative on the top and bottom.
+\end{proposition}
+
+\begin{example}
+Big Warning:
+\[(\frac{a}{b}) = 1 \not \implies \text{ a is quadratic residue modulo b}\]
+For example $(2/15) = 1$, but 2 is not a quadratic residue modulo 15.\\\\
+However,
+\[(\frac{a}{b}) = -1 \implies \text{ a is a non-residue modulo b}\]
+This follows from the fact that $(a/p_i) = -1$ for at least one of the prime factors of $b$.
+\end{example}
+
+\begin{proposition}[5.2.2 of the Text]
+Let $b \in \Zbb_+$ be odd, then
+\begin{itemize}
+    \item a) $(\frac{-1}{b}) = (-1)^{(b-1)/2}$
+    \item b) $(\frac{2}{b}) = (-1)^{(b^2-1)/8}$
+    \item If $a, b \in \Zbb_+$ are odd, then
+    \[(\frac{a}{b}) \cdot (\frac{b}{a}) = (-1)^{\frac{(a-1)(b-1)}{4}}\]
+\end{itemize}
+\end{proposition}

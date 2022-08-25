@@ -1,0 +1,174 @@
+\section{Lecture 8 (March 1st)}
+
+\subsection{Announcement:}
+Midterm is on March 17th! The plan is for it to be the evenings.
+
+\subsection{Power Residues}
+For this section, $pp.45 - 46$ of Ireland and Rosen are a good reference.
+
+\begin{definition}
+Suppose $m, n \in \Zbb_+$, $a \in \Zbb$ such that $(a, m) = 1$, then we say that $a$ is a \textit{nth power residue} modulo $m$ if and only if
+\[x^n \equiv a\ mod\ m\ (*)\]
+is solvable.
+\end{definition}
+
+\noindent Given such $(*)$, we are interested in two questions.
+\begin{itemize}
+    \item 1. Does $(*)$ have a solution?
+    \item 2. If yes, how many solutions are there?
+\end{itemize}
+In general this question is very hard to answer, but in some specific cases we do have some answers.
+
+\begin{proposition}[4.2.1]
+If $m \in \Zbb_+$ such that $U(m)$ is cyclic, and $a \in \Zbb$ is coprime to $m$, then
+\[x^n \equiv a\ mod\ m\]
+has solutions if and only if $a^{\phi(m)/d} \equiv 1\ (mod\ m)$, where $d = (\phi(m), n)$.\\\\
+If there are solutions, then there are exactly $d$ solutions.
+\end{proposition}
+
+\noindent {\bf Proof 1 - Bezout's Theorem}
+\begin{proof}
+Let $g$ be a primitive root modulo $m$, and let
+\[a = g^b\]
+, which is possible as $g$ is a primitive root.\\\\
+Suppose that $x$ the hypotehtical solution is that $x = g^y$, then
+\[x^n \equiv a\ (mod\ m) \iff g^{ny} \equiv g^b\ (mod\ m)\]
+This holds if and only if (ie. unit group lagrange)
+\[ny \equiv b\ (mod\ \phi(m))\]
+It follows from Bezout's Theorem that this is solvable if and only if $d = (\phi(m), n) | b$.\\\\
+If there is at least one solution, then there are exactly $d$ solutions.\\\\
+Now we wish to show that
+\[d | b \iff a^{\phi(m)/d} \equiv 1\ (mod\ m)\]
+Suppose that $d$ divides $b$, then $a^{\phi(m)/d} = g^{b\phi(m)/d}$. Since $d | b$, $b/d$ is an integer, so we have that
+\[a^{\phi(m)/d} = (g^{\phi(m)})^{b/d} \equiv 1\ (mod\ m)\]
+Conversely, suppose that
+\[a^{\phi(m)/d} \equiv 1\ (mod\ m) \implies g^{b\phi(m)/d} \equiv 1\ (mod\ m)\]
+So we have that $\phi(m) | b \cdot \phi(m)/d$, so $b/d$ is an integer.
+\end{proof}
+
+\begin{lemma}[Fundamental Theorem of Finite Cyclic Groups]
+Let $G$ be a cyclic group of order $n$, and let $H$ be a subgroup of $G$ of order $d$. Then $x \in H$ if and only if $x^d$ is the identity if and only if $ord(x) | d$.
+\end{lemma}
+
+\begin{proof}
+Exercise for the reader. (It's really not that bad, trust me)
+\end{proof}
+
+\begin{theorem}
+Let $G$ be a cyclic of order $n$, suppose $k$ is a positive integer and $a \in G$. Then $a$ is a $k$-th power in $G$ ie. $a = b^k$ for some $b \in G$ if and only if $a^{n/(k, n)} = e$, the identity element of $G$, if and only if $x^k = a$ has $(n, k)$ solutions in $G$.
+\end{theorem}
+
+\begin{proof}
+Let $H$ be the subgroup of $G$ consisting of $k$-th powers in $G$, and let $g \in G$ be such that
+\[G = \langle g \rangle\]
+Then $H = \{g^{jk} | j \in \Nbb\} = \langle g^k \rangle$.\\\\
+Since $ord(g^k) = \frac{n}{(k, n)}$, we have that $\#H = \frac{n}{(k, n)}$.\\\\
+Consider $\phi: G \to G, x \mapsto x^k$, we have that $im(\phi) = H$, erefore we have shown that element is in $H$ if and only if it has to be a $d = \frac{n}{(k, n)}$-th power.\\\\
+Note that this implies that $\phi$ is a $(k, n)$-to-1 mapping, so there are $(k, n)$  number of solutions to a particular element.
+\end{proof}
+
+\noindent {\bf Proof 2 - Cyclic Group Interpretation}
+\begin{proof}
+Applying the theorem above immediately gives us the proposition above.
+\end{proof}
+
+\begin{theorem}
+Write $m = 2^e p_1^{e_1} ... p_r^{e_r}$, $p_i$ pairwise distinct odd primes.\\\\
+Then $x^n \equiv a\ mod\ m$, $(a, m) = 1$
+is solvable if and only if the system
+\[x^n \equiv a\ mod\ 2^e, x^n \equiv a\ mod\ p_1^{e_1}, ..., x^n \equiv a\ mod\ p_r^{e_r}\]
+is solvable.\\\\
+Use Chinese Remainder Theorem
+\end{theorem}
+
+\begin{remark}
+We have that $U(p_i^{e_i}), U(2), u(4)$ are all cyclic, hence our prior discussion can be applied to those. Then we are left with the question of
+\[x^n \equiv a\ mod\ m\]
+\end{remark}
+
+\begin{proposition}[4.2.2]
+Let $a \in \Zbb$ be odd, $e \geq 3$, and consider $x^n \equiv a\ mod\ 2^e$.\\\\
+If $n$ is odd, then a solution exists and is always unique.\\\\
+If $n$ is even, a solution exists if and only if $a \equiv 1\ (mod\ 4)$ and $a^{2^{(e-2)/d}} = 1\ (mod\ 2^e)$ where $d = (n, 2^{e-2})$.\\\\
+When a solution exists, there are exactly $2d$ solutions.
+\end{proposition}
+
+\begin{proof}
+Exercise to come.
+\end{proof}
+
+\subsection{Quadratic Residues}
+\noindent {\bf Things are a lot nicer in Quadratic Residues!}
+
+\begin{definition}
+Let $a \in \Zbb$, $m \in \Zbb_+$, $(a, m) = 1$. We say that $a$ is a \textit{quadratic residue} modulo $m$ if the congruence
+\[x^2 \equiv a\ (mod\ m)\ (*)\]
+has a solution.\\\\
+If $(*)$ does not have a solution, then $a$ is referred to as a (quadratic) \textit{non-residue}. 
+\end{definition}
+
+\noindent A couple of blackboxes here that are special cases of Proposition 4.2.3 and 4.2.4 in the textbook.
+
+\begin{proposition}[Quadratic Residue on Odd Primes]
+Let $p \in \Zbb_+$ be an odd prime, and suppose that $a \in \Zbb$ that is not divisible by $p$, then
+\[x^2 \equiv a\ mod\ p\]
+is solvable if and only if
+\[x^2 \equiv a\ mod\ p^e\]
+is solvable for all $e \geq 1$.
+\end{proposition}
+
+\begin{proposition}[Quadratic Residue on Powers of 2]
+Suppose that $a \in \Zbb$ is odd. Then 
+\[x^2 \equiv a\ mod\ 8\]
+is solvable if and only if
+\[x^2 \equiv a\ mod\ 2^e\]
+is solvable for all $e \geq 3$.
+\end{proposition}
+
+\begin{proposition}[5.1.1]
+Suppose $m = 2^e p_1^{e_1} ... p_r^{e_r}$ be the prime factorization of $m \in \Zbb_+$, and suppose $(a, m) = 1$.\\\\
+Then,
+\[x^2 \equiv a\ (mod\ m)\ (*)\]
+is solvable if and only if three conditions are satisfied
+\begin{itemize}
+    \item a) If $e = 2$, then $a \equiv 1\ (mod\ 4)$
+    \item b) If $e \geq 2$, then $a \equiv 1\ (mod\ 8)$
+    \item c) For each $i$, we have that
+    \[a^{(p_i - 1)/2} \equiv 1\ (mod\ p_i)\]
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+Sunzi's Theorem tells us that $(*)$ is solvable if and only if $x^2 \equiv a(2^e)$, ..., $x^2 \equiv a(p_r^{e_r})$ are all solvable.\\\\
+Consider $x^2 \equiv a\ mod\ (2^e)$,\\\\
+1 is the only quadratic residue mod 4, and 1 is the only quadratic residue mod 8.\\\\
+On the other hand, our blackbox gives that $x^2 \equiv 8$ is solvable if and only if $x^2 \equiv a\ mod(2^e)$ is solvable for all $e \geq 3$.\\\\
+So we are done with $(a)$ and $(b)$.\\\\
+For $(c)$, consider $x^2 \equiv a\ (mod\ p_i^{e_i})$. Proposition 4.2.1 gives that $x^2 \equiv a\ mod\ p_i$ is solvable if and only if $a^{\phi(m)/d} \equiv 1\ (mod\ m)$, since $\phi(m)/d = (p_i - 1)/2$, we have that
+\[a^{(p_i - 1)/2} \equiv 1\ mod\ p_i\]
+Then using the other black box, we know this is solvable if and only if solvable to an arbitrary power of $p_i$
+\end{proof}
+
+\begin{remark}
+Studying Quadratic Congruences amounts to studying them modulo primes.
+\end{remark}
+
+\subsection{The Legendre Symbol}
+Let $p$ be an odd prime, and let $a \in \Zbb$.
+\begin{definition}[The Legendre Symbol]
+\[(\frac{a}{p}) = \begin{cases}
+1,\ \text{if a is a quadratic residue mod p}\\
+0,\ \text{p divide a}\\
+-1,\ \text{otherwise (ie. dealing with quadratic non-residues)}
+\end{cases}\]
+The symbol $(\frac{p}{q})$ is called the Legendre symbol.
+\end{definition}
+
+\begin{proposition}[5.1.2]
+We have the parts:
+\begin{itemize}
+    \item (a) $(\frac{a}{p}) = a^{(p-1)/2}\ mod\ p$ (Euler's Criterion)
+    \item (b) $(\frac{ab}{p}) = (\frac{a}{p}) \cdot (\frac{b}{p})$, so the Legendre Symbol is completely multiplicative
+    \item (c) If $a \equiv b\ (mod\ p)$, then $(\frac{a}{p}) = (\frac{b}{p})$
+\end{itemize}
+\end{proposition}

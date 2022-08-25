@@ -1,0 +1,52 @@
+\section{Lecture 1 (January 27th) - Introduction to Number Theory}
+
+There are two maor branches in Number Theory - Algebraic and Analytic Number Theory.
+
+\subsection{What is Number Theory?}
+
+\begin{definition}
+\textbf{Number Theory} is the study of the integers, along with their analogs in algebraic number fields. Primes are a key focus, both in terms of:
+\begin{itemize}
+    \item 1) Distributional Properties - Analytic Number Theory
+    \item 2) Building Blocks of Algebraic Numbers - Algebraic Number Theory
+\end{itemize}
+\end{definition}
+
+\begin{example}[Problems in Analytic Number Theory]
+There are many problems in Analytic Number Theory.
+\begin{itemize}
+    \item Prime Number Theorem:\\\\
+Let $\pi(x)$ be the number of primes between 1 and x, then
+\[\lim_{x \to \infty} \frac{\pi(x)}{x/ln(x)} = 1\]
+This gives you a density approximation of $\pi(x)$ for large integer x.
+
+    \item Twin Prime Conjecture:\\\\
+    Twin primes are pair of primes $(p, q)$ such that $q = p+2$ (ex. $(3, 5)$). The Twin Prime Conjecture postulates that there are infinitely many pais of twin primes.
+    
+    \item Polignac's Conjecture:\\\\
+    Let $2k$ be a even number, then there exists infinitely many pair of primes $(p, q)$ where $q = p + 2k$. Yitang Zhang shrinked this number to $70,000,000$.
+    
+    \item The Goldbach Conjecture:\\\\
+    Every even integer greater than 2 is the sum of two prime numbers.
+\end{itemize}
+\end{example}
+
+\begin{example}[Problems in Algebraic Number Theory]
+There are many problems in Algebraic Number Theory.
+\begin{itemize}
+    \item Factorization in (rings of Integers of) Number Fields:\\\\
+    For example, 2 is a prime element of $\mathbb{Z}$, but 2 is not prime in $\mathbb{Z}[i]$ since $2 = (1 + i)(1 - i)$. Note that $1 + i = i(1 - i)$, so $(2) = (1 + i)^2$.\\\\
+    One might ask how many ways are there to factor a given prime. It turns out that given a prime p, there's exactly 2 ways to factor them in $\mathbb{Z}[i]$
+    \item Fermat's Last Theorem:\\\\
+    There are no pairs of distinct integer $(x, y, z)$ such that $x^n + y^n = z^n$, for $n \geq 3$. (SHE READ THE ENTIRE PROOF 2nd Year of Grad School????)
+    
+    \item ABC Conjecture:\\\\
+    A ``powerful number" is a positive integer whose prime factorization contain relatively few distinct primes (appropriately weighted) with exponent 1.\\\\
+    For example $2^{10}*3^7$ is a powerful number, so is $2^{10}*3^7*5$. 1 is also a powerful number.\\\\
+    Powerful Number has less prime factor whose power is 1, than the ones that have prime factor whose exponent is not 1.\\\\
+    If a, b are very powerful coprime numbers, can $a+b$ also be powerful?\\\\
+    For example, take $2^{10} + 3^{15} = 14,349,931 = 31 \cdot 462,901$, this is not a powerful prime. This lack of powerfulness is predicted by the ABC conjecture.\\\\
+    What about $3^{15} + 5$? ABC predicts that this sum is not very powerful.
+\end{itemize}
+\end{example}
+

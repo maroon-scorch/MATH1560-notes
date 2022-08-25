@@ -1,0 +1,87 @@
+\section{Lecture April 28th}
+
+\subsection{Recall:}
+
+Last time,
+
+\begin{itemize}
+    \item Birefly revisited the proof that $p | Disc(K) \iff p$ ramifies in $K$ in the monogenic case, but note this holds in general
+    \item Stated Dedekind-Kummer Theorem and proved (albeit somewhat rapidly) the ``shape" portion of the theorem, ie. 
+    \[p\mathcal{O}_K = p_1^{e_1} ... p_r^{e_r}\]
+    \[minpoly_\Qbb(x) \equiv \pi_1^{e_1}(x) ... \pi_r^{e_r}(x)\ mod\ p\]
+    \item But we haven't proved what exactly $p_1, ..., p_r$ are. That, $p_i = (p, \pi_i(\theta))$
+\end{itemize}
+
+\subsection{Finishing the Proof:}
+
+\begin{theorem}
+Let $K = \Qbb(\theta), \theta \in \mathcal{O}_K$. Let $f := minpoly_\Qbb(\theta)$, $p \in \Zbb$ be prime.\\\\
+Suppose that $p \nmid [\mathcal{O}_K : \Zbb[\theta]]$. If $\overline{f}(x) = \overline{\pi_1}(x)^{e_1} ... \overline{\pi_r}(x)^{e_r}\ mod\ p$ is prime factorization of $f$ modulo $p$, then
+\[p\mathcal{O}_K = p_1^{e_1} ... p_r^{e_r}\]
+, ({\bf We proved up to here }) where $p_i = (p, \pi_i(\theta))$ for any lift of $\pi_i(x) \in \Zbb[x]$ of $\overline{\pi_i}(x)$.
+\end{theorem}
+
+\begin{proof}
+So far we defined a homomorphism
+\[\phi: \frac{\Zbb[\theta]}{p\Zbb[\theta]} \to \frac{\mathcal{O}_K}{p\mathcal{O}_K}\]
+\[x + p \Zbb[\theta] \mapsto x + p \mathcal{O}_K\]
+We argued that since $p \nmid [\mathcal{O}_K : \Zbb[\theta]]$, $\phi$ becomes an isomorphism remarkably.\\\\
+Hence, we have that
+\[\frac{\mathcal{O}_K}{p\mathcal{O}_K} \cong \frac{\Zbb[\theta]}{p\Zbb[\theta]} \cong \frac{\Zbb[x]}{(p, f(x))} \cong \frac{\Fbb_p[x]}{(\overline{f}(x))}\]
+\[\frac{\mathcal{O}_K}{p\mathcal{O}_K} \cong \frac{\mathcal{O}_K}{p_1^{e_1}} \times ... \times \frac{\mathcal{O}_K}{p_r^{e_r}}\]
+\[\frac{\Fbb_p[x]}{(\overline{f}(x))} \cong \frac{\Fbb_p[x]}{\overline{\pi_1}^{f_1}} \times ... \times \frac{\Fbb_p[x]}{\overline{\pi_s}^{f_s}}\]
+``Comparing the nilpotent orders" or an argument with chains of ideals shows that $r = s$ and $e_i = f_i$ after some reordering, hence
+\[\mathcal{O}_K / p_i \cong \Fbb_p[x] / (\overline{\pi}_i(x))\]
+Since $p_i$ is a prime ideal and non-zero ideals are maximal, $\mathcal{O}_K / p_i$ is remarkably a finite field. Moreover, since $(p) \subset p_i$, we also have that the finite field has characteristic $p$.\\\\
+Thus, $\mathcal{O}_K / p_i$ is a finite extension of $\Fbb_p$, call the degree of extension $f_i$ (abuse of notation, not the same as before).\\\\
+Since $\overline{\pi_i}(x)$ is an irreducible polynomial in $\Fbb_p[x]$, we have that
+\[f_i = deg \overline{\pi_i}(x)\]
+This $f_i$ is called \textbf{the inertial degree of $p_i$ over $p$}, so we have that
+\[|\mathcal{O}_K / p_i| = p^{f_i} = p^{deg(\overline{\pi_i})}\]
+The ideal $(\overline{\pi}_i(x))/(\overline{f}) \subset \frac{\Fbb_p[x]}{(\overline{f})}$ correspond via the chain of isomorphisms prior to the ideal $p_i/p \mathcal{O}_K$. The 3rd isomorphism theorem then says that $(p, \pi_i(\theta))$ (for any life $\pi_i$) is the only possible lift of $p_i/p\mathcal{O}_K$ to $\mathcal{O}_K$.
+\end{proof}
+
+\begin{remark}[Dedekind's Revenge]
+What if $p | [\mathcal{O}_K : \Zbb[\theta]]$?\\\\
+If $K = \Qbb(\sqrt{-3})$, then $\mathcal{O}_K = \Zbb[\frac{1 + \sqrt{-3}}{2}] = \Zbb[\frac{-1 + \sqrt{-3}}{2}] = \Zbb[\omega]$.\\\\
+Let $\theta = \sqrt{-3}$, so that $[\mathcal{O}_K : \Zbb[\theta]] = 2$ (We can argue that the $disc(x^2 + 3) = -12$ while $disc(K) = disc(x^2 + x + 1) = -3$, then
+\[[\mathcal{O}_K : \Zbb[\theta]] = \sqrt{(-12/-3)} = 2\]
+Get $(x^2 + 3) = x^2 - 1 = (x - 1)^2\ mod\ 2$, then incorrectly applying the DK-Theorem gives us that $2$ ramifies in $\mathcal{O}_K$.\\\\
+OTOH, using DK correctly gives us $x^2 + x + 1\ mod\ 2$ has no roots in $mod$ 2 and is thus irreducible over $\Fbb_2$, thus the correct conclusion is that $(2)$ is actually inert in $K = \Qbb(\sqrt{-3})$.
+\end{remark}
+
+\subsection{Ramification degrees, inert degrees, primes upstairs and downstairs}
+
+Let $\pfrak$ be a non-zero prime ideal of $\mathcal{O}_K$. We showed that $\mathcal{O}_K/\pfrak$ is a fintie field with charactersitic $p$, where $p \Zbb = \pfrak \cap \Zbb$ (contraction of maximal ideal to $\Zbb$ is still a maximal ideal).\\\\
+Thus, $\mathcal{O}_K/\pfrak$ is a finite extension of $\Zbb/p\Zbb$ with degree $f$. $f$ is called the \textbf{inertial degree}.\\\\
+We can think of $\mathcal{O}_K/\pfrak$ as a $\Fbb_p$-vector-space - it's a quotient of $\Zbb/p\Zbb$-vector-space $\mathcal{O}_K/(p)$ (since $(p) \subset \pfrak$).\\\\
+But we have said that
+\[|\mathcal{O}_K/(p)| = p^n, n = [K: \Qbb]\]
+Thus, we observe that $f \leq n$ using some linear algebra,\\\\
+If $p \mathcal{O}_K = \pfrak^e p_2^{e_2} ... p_r^{e_r}$, then $e$ is called the \textbf{ramification index / ramification degree} of $\pfrak$ over $p$.\\\\
+We write $e(\pfrak | p)$ as the ramification index, and $f(\pfrak | p)$ as the inertial degree.\\\\
+We say that $\pfrak$ \textbf{lies above} $p$ in $K$, and that $p$ lies below $\pfrak$ in $\Qbb$.\\\\
+Colloquially $\pfrak$ is a ``prime upstairs" and $p$ is a ``prime downstairs".
+
+\subsection{Fundamental Identity}
+
+\begin{theorem}[Fundamental Identity]
+Let $p \in \Zbb$ be prime, and suppose $[K: \Qbb] = n$ and $p \mathcal{O}_K = p_1^{e_1} ... p_g^{e_g}$ is the prime factorization of $p \mathcal{O}_K$, where $f_i = f(p_i | p)$.\\\\
+Then, the sum
+\[\sum_{i = 1}^g e_i f_i = n\]
+\end{theorem}
+
+\begin{remark}
+When $p$ is totally ramified, $e_1 = n$, $f_1 = 1$.\\\\
+When $p$ is inert, $[\mathcal{O}_K/p : \Fbb_p] = n$.\\\\
+When $K$ is Galois, the $e_i$ for $1 \leq i \leq g$ are all the same, and similarly for $f_i$'s (Look back at $\Qbb(\zeta_5)$ examples)
+\end{remark}
+
+\begin{proof}
+In the monogenic case, the proof is remarkably simplified, this is because the $f_i$'s are remarabkly easy to find.\\\\
+We had that
+\[\mathcal{O}_K/p_i \cong \Fbb_p[x]/\overline{\pi_i}(x)\]
+\[\mathcal{O}_K/(p) \cong ... \cong \Fbb_p/(\overline{f})\]
+, where $deg(\overline{f}) = n$ and $|\Fbb_p[x]/(\overline{\pi_i}^{e_i})| = p^{e_i deg(\pi_i)} = p^{e_i f_i}$.\\\\
+And we can multiply the $p^{e_i f_i}$ back to $p^n$, so $\sum_i e_i f_i = n$
+\end{proof}

@@ -1,0 +1,118 @@
+\section{Lecture April 7th}
+
+\subsection{Quadratic Fields}
+
+\begin{definition}
+A quadratic field is a number field $K$ of degree $2$ over $\Qbb$. Thus, $K = \Qbb(\theta)$ for $\theta$ a root of $x^2 + ax + b$ where $a, b \in \Zbb$, and thus $\theta = \frac{-a \pm \sqrt{a^2 - 4b}}{2}$.
+\end{definition}
+
+\begin{proposition}
+The Quadratic fields are of the form
+\[\Qbb(\sqrt{d})\]
+where $d \in \Zbb$ is square-free.
+\end{proposition}
+
+\begin{theorem}[pg. 64 of ST]
+Let $d \in \Zbb$ be a square-free integer, and let $K = \Qbb(\sqrt{d})$, then $\mathcal{O}_k$ is equal to
+\begin{itemize}
+    \item $\Zbb[\sqrt{d}]$ if $d \not \equiv 1\ mod\ 4$
+    \item $\Zbb[\frac{1 + \sqrt{d}}{2}]$ if $d \equiv 1\ mod\ 4$
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+Every $\alpha \in \Qbb(\sqrt{d})$ is 
+\[\alpha = \frac{a + b \sqrt{d}}{c}, a, b, c \in \Zbb\]
+We can assume without loss that $c > 0$ and $(a, b, c) = 1$.\\\\
+Now $\alpha \in \mathcal{O}_k$ if and only if its minimal polynomial is an integer polynomial, so
+\[(x - \frac{a + b \sqrt{d}}{c})(x - \frac{a - b \sqrt{d}}{c} \in \Zbb[x]\]
+This holds if and only if
+\[\frac{a^2 - b^2 d}{c^2} \in \Zbb, \frac{2a}{c} \in \Zbb\]
+We claim that $(a, c) = 1$. Indeed, suppose $(a, c) \neq 1$, then $(a, c) | (a, b, c)$ by observing the experssion $\frac{a^2 - b^2 d}{c^2}$ and the fact that $(a, b, c) \neq 1$ lead to a contradiction.\\\\
+Now since $\frac{2a}{c} \in \Zbb$, this only happens when $c$ is either $2$ or $1$.\\\\
+If $c = 1$, then $\alpha \in \mathcal{O}_k$ anyway.\\\\
+Now if $c = 2$, the same argument shows us that $(b, c) = 1$, so $b$ is odd and $a$ is odd. Moreover, $\alpha \in \mathcal{O}_k$ with these assumptions iff
+\[\frac{a^2 - b^2d}{c^2} = \frac{a^2 - b^2 d}{4} \in \Zbb\]
+THis happens if and only if
+\[a^2 - b^2 d \equiv 0\ mod\ 4\]
+Since $a, b$ are odd, their square is always $1$ mod $4$, so we have that
+\[d \equiv 1\ mod\ 4\]
+Thus $c = 2$ and $\alpha \in \mathcal{O}_k$ implies that $d \equiv 1\ mod\ 4$.\\\\
+In summary, if $d \not \equiv 1\ mod\ 4$, then $c = 1$, then $\alpha$ is of the form $a + b \sqrt{d}$, so $\mathcal{O}_k = \Zbb[\sqrt{d}]$.\\\\
+If $d \equiv 1\ mod\ 4$, then we can have $c = 2$ and $a, b$ being odd. Hence we have that
+\[\mathcal{O}_k = \Zbb[\frac{1 + \sqrt{d}}{2}]\]
+\end{proof}
+
+\begin{theorem}[pg. 65 of S+T]
+We have that
+\begin{itemize}
+    \item (a) If $a \not \equiv 1\ mod\ 4$, $\{1, \sqrt{d}\}$ an integral basis. If $d \equiv 1\ mod\ 45$, $\{1, \frac{1 + \sqrt{d}}{2}\}$ is an integrable basis.
+    \item (b) If $d \not \equiv \mod\ 4$, then
+    \[disc(K) = 4d\]
+    If $d \equiv 1\ mod\ 4$, then
+    \[disc(K) = d\]
+\end{itemize}
+\end{theorem}
+
+\subsection{Cyclotomic Extensions}
+
+\begin{definition}
+A cyclotomic field is a number field of the form
+\[K = \Qbb(\zeta_n)\]
+, where $\zeta_n$ is any primitive $n$-th root of unity, usually $\zeta_n = e^{2\pi i / n}$
+\end{definition}
+
+\begin{example}
+$K = \Qbb(i)$ is a cyclotomic extension since $\zeta_4 = i$.\\\\
+$K = \Qbb(\sqrt{-3})$ is a cyclotomic extension since $K = \Qbb(\frac{1 + \sqrt{-3}}{2}) = \Qbb(\zeta_3)$.
+\end{example}
+
+\begin{proposition}
+Important facts about Cyclotomic Extensions:
+\begin{itemize}
+    \item Any embedding of $\Qbb(\zeta_n) \to \Cbb$ has image contained in $\Qbb(\zeta_n)$ (In other words, there extensions are Galois over $\Qbb$)
+    \item We care about radical extensions, which are of the form
+    \[\Qbb(\sqrt[n]{a}), a \in \Qbb\]
+    These extensions are not generally Galois, but you could extend the extension to some Galois closure.\\\\
+    In particular, we could ``repair" the base field by adjoining a primitive $n$-th root of unity to turn this into a Kummer extension. Indeed, let $K = \Qbb(\zeta_n)$, then $L = K(\sqrt[n]{a})$, then $L/K$ is Galois (the embeddings: $L \to \Cbb$ fix $K$ send $L$ to itself)
+    \item $[\Qbb(\zeta_n): \Qbb] = \phi(n)$
+    \item The field automorphisms $\sigma: \Qbb(\zeta_n) \to \Qbb(\zeta_n)$ form a cyclic group under composition, of order $\phi(n)$, you can describe this as a permutation on $\zeta_n$.
+\end{itemize}
+    Let $K = \Qbb(\zeta_n)$, then
+\begin{itemize}
+    \item $\mathcal{O}_k = \Zbb[\zeta_n]$, the case for when $n = p$ is a prime is in Stewart and Tall
+    \item When $n \geq 3$, $Disc(K) = (-1)^{\Phi(n)/2} \frac{n^{\phi(n)}}{\prod_{p | n} p^{\phi(n)/(p-1)}}$
+    \item For $n = p$ a prime, we habe that
+    \[Disc(\Qbb(\zeta_p)) = (-1)^{(p-1)/2} p^{p-2}\]
+    \item In particular if $p \in \Zbb$ and $p \nmid n$, then $p \nmid Disc(\Qbb(\zeta_n))$.
+\end{itemize}
+\end{proposition}
+
+\begin{theorem}[Kronecker-Weber Theorem]
+Every finite abelian extension of $\Qbb$ is contained in some cyclotomic extension.
+\end{theorem}
+
+\subsection{Prime Factorization in Number Fields (5.1)}
+
+Recall the examples of non-UFDs given in MATH 1530, like $\Zbb[\sqrt{-5}]$, where $6 = 2 \cdot 3 = (1 + \sqrt{-5}) \cdot (1 - \sqrt{-5})$, but $2$ is not an associate of irreducibles $1 + \sqrt{-5}$ or $1 - \sqrt{-5}$.\\
+
+In $\Qbb(\sqrt{15})$, we also have that $2 \cdot 5 = (5 + \sqrt{15})(5 - \sqrt{15})$ in $\Zbb[\sqrt{15}]$.\\
+
+Notice:
+\[5 + \sqrt{15} = \sqrt{5}(\sqrt{5} + \sqrt{3})\]
+\[5 - \sqrt{5} = \sqrt{5}(\sqrt{5} - \sqrt{3})\]
+Multipliying this then yields 
+\[25 - 15 = 10 = 5(\sqrt{5} + \sqrt{3})(\sqrt{5} - \sqrt{3})\]
+So this factors in $a_1 = \sqrt{5}, a_2 = \sqrt{5} + \sqrt{3}, a_3 = \sqrt{5} - \sqrt{3}$ are being grouped in $2$ ways:
+\[(a_1^2)(a_2 a_3) = (a_1 a_2)(a_1 a_3)\]
+
+In other words, the problem of Non-UFD goes away by passing it through some extensions in $\mathcal{O}_L$ where $L = \Qbb(\sqrt{15}, \sqrt{5}) = \Qbb(\sqrt{3}, \sqrt{5})$. 
+
+In $\Qbb(\sqrt{30})$, we have that $2 \cdot 3 = (6 + \sqrt{30})(6 - \sqrt{30})$\\
+
+In $\Qbb(\sqrt{-10})$, we have that $2 \cdot 7 = (2 + \sqrt{10})(2 - \sqrt{10})$\\
+
+
+\begin{theorem}[Principal Ideal Theorem]
+Let $K$ be a number field. Then there exist some finite extension $L/K$ such that every non-zero $\alpha \in \mathcal{O}_K$ has a unique factorization into irreducibles in $\mathcal{O}_L$. (Note that $\mathcal{O}_L$ itself NEED not be a UFD. It is in fact not true that every number field $K$ has a finite extension $L/K$ such that $\mathcal{O}_L$ is a UFD)
+\end{theorem}

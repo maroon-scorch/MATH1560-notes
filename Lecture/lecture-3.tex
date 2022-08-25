@@ -1,0 +1,165 @@
+\section{Lecture 3 (February 3rd):}
+
+\subsection{Arithmetic Functions:}
+
+\begin{definition}
+An \textit{arithmetic function} is a function $f: \Zbb_+ \to \Cbb$ (typically they are integer-valued)
+\end{definition}
+
+\begin{example}
+Examples of Arithmeitc Functions:
+\begin{itemize}
+    \item The euler $\phi$ function is an arithmetic function.
+    \item $\tau(n) = \sum_{d | n} 1$ (by convention this is the positive divisors)
+    \item $\sigma(n) = \sum_{d | n} d$ is the sum of divisors of n. Note that $\sigma(n) = 2n$ means n is perfect.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+An arithmetic function f is multiplicative, if
+\[f(mn) = f(m)f(n),\ \text{when gcd(m, n) = 1}\]
+An arithmetic function f is completely multiplicative, if
+\[f(mn) = f(m)f(n),\ m, n  \in \Zbb\]
+\end{definition}
+
+\begin{remark}
+If particular, with induction, if f is multiplicative, and $n_1, ..., n_k$ are positive pairwise coprime integers, then
+\[f(n_1n_2...n_k) = f(n_1)f(n_2)...f(n_k)\]
+In particular, when $n = p_1^{e_1}...p_k^{e_k}$,
+\[f(n) = f(p_1^{e_1})...f(p_k^{e_k})\]
+\end{remark}
+
+\begin{definition}
+An arithmetic function is called a \textbf{summatory function} if it's a function f of the following form:
+\[f(n) = \sum_{d | n} g(d)\]
+, where g is some arithmetic function.
+\end{definition}
+
+\begin{remark}[Food for Thought:]
+How special are these summatory functions in the set of arithmetic functions? Good concept check at the end of next lecture.
+\end{remark}
+
+\begin{lemma}[Summatory Functions inherit Multiplicativity]
+If g is a multiplicative function, and
+\[f(n) = \sum_{d | n} g(d)\]
+, then f is also multiplicative.
+\end{lemma}
+
+\begin{proof}
+For all m, n positive integers such that m and n are coprime, note that the divisors d of $mn$ is exactly the product set of divisors a of m and divisors b of n, ie.
+\[\{d : d | mn\} \iff \{(a, b) : a | m, b | n\}\]
+We want to show that the two sets above are bijective.\\\\
+Consider the map $(a, b) \mapsto ab$, suppose there's $(c, d)$ such that $c \neq a, d \neq b$ but $ab = cd$, we know $gcd(a, b) = 1$, or else this would imply $gcd(m, n) > 1$, so we have that
+\[ab = (p_1^{e_1}...p_r^{e_r})(q_1^{f_1}...q_s^{f_s})\]
+Now notice that if there's a different product that equals $ab$, WLOG, we will say that d contains a factor of a, say $p_i^k$, but this means that $p_i^k | n$, but since $a | m$, we also know $p_i^k | m$, so $gcd(m, n) \geq p_i^k$ is a contradiction. So the map has to be injective.\\\\
+Moreover, for all $d \in \{d : d|n\}$, since $gcd(m, n) = 1$, we can take $a = gcd(d, m), b = gcd(d, n)$, then $d = ab$. Specifically, clearly, $a | d$ and $b | d$, since $gcd(a, b) = 1$, $ab | d$. Since $gcd(m, n) = 1$ and d divides $mn$, d is composed of divisors from m and n that are disjoint, so $gcd(m, d), gcd(n, d)$ partitions those divisors perfectly.
+so this is surjective.
+\begin{align*}
+    f(mn) &= \sum_{d | mn} g(d)\\
+    &= \sum_{a | m}\sum_{b | n} g(ab) \tag*{Bijection of Sets Above}\\
+    &= \sum_{a | m}\sum_{b | n} g(a)g(b) \tag*{$(a, b) = 1$}\\
+    &= (\sum_{a | m}g(a))(\sum_{b | n} g(b)) \\
+    &= f(m)f(n)
+\end{align*}
+\end{proof}
+
+\begin{remark}
+\[\tau(n) = \sum_{d | n} 1\]
+is the summatory function of the constant 1 function.
+\[\sigma(n) = \sum_{d | n} d\]
+is the summatory function of the identity function.\\
+It is not true that the summatory function of the completely multiplicative function is completely multiplicative, but this does mean that both $\sigma, \tau$ are multiplicative functions.\\
+Let p be a prime, then
+\[\tau(p^e) = e + 1\]
+since the only divisors of $p^e$ is $1, p, ..., p^e$.\\\\
+\[\sigma(p^e) = \frac{p^{e+1} - 1}{p - 1}\]
+So we obtain that, when $n = p_1^{e_1}...p_k^{e_k}$
+\[\tau(n) = \prod_{i = 1}^k (e_i + 1)\]
+\[\sigma(n) = \prod_{i = 1}^k \frac{p_i^{e_i+1} - 1}{p_i - 1}\]
+\end{remark}
+
+\begin{remark}
+There are also higher order divisor functions
+\[\sigma_k(n) = \sum_{d | n} d^k\]
+ie, $\sigma_0 = \tau, \sigma_1 = \sigma$.\\\\
+This is still a multiplicative function since $d^k$ is multiplicative.
+\end{remark}
+
+\subsection{Interlude: review of $\Zbb/n\Zbb$ and its units}
+
+\begin{definition}
+If $a, b, m \in \mathbb{Z}$ with $m$ non-zero, we say that $a$ is congruent to $b$ modulo $m$ if $m | b - a$, we denote this as
+\[a \equiv b\ (mod\ n)\]
+Or as
+\[a \equiv b(m)\]
+Congruence modulo m is an equivalence relation on $\mathbb{Z}$. If $a \in \mathbb{Z}$, $\overline{a}$ denotes the set of integers congruent to $a\ mod\ m$, ie. $\overline{a} = \{a + km | k \in \mathbb{Z}\}$
+\end{definition}
+
+\begin{definition}
+The set of congruence classes mod m is denoted $\Zbb/m\Zbb$. If $\overline{a_1}, ..., \overline{a_n}$ form a complete set of congruence classes mod m, then
+\[\{a_1, a_2, ..., a_m\}\]
+is called the \textbf{complete set of residues mod m}.\\\\
+$\Zbb/m\Zbb$ can be endowed with the structure of the commutative ring by setting
+\[\overline{a + b} = \overline{a} + \overline{b}\]
+\[\overline{a \cdot b} = \overline{a} \cdot \overline{b}\]
+\end{definition}
+
+\begin{proposition}
+The set of units in $\mathbb{Z}/m\mathbb{Z}$ is exactly
+\[\{\overline{a}: (a, m) = 1\}\]
+\end{proposition}
+
+\begin{proof}
+Suppose $\overline{a} \in \mathbb{Z}/m\mathbb{Z}$.\\\\
+If $\overline{a}$ is invertible, then there exists $\overline{b} \in \Zbb/m\Zbb$ then
+\[\overline{b}\overline{a} \equiv 1(m)\]
+This happens if and only if there are integer $b, n$ where
+\[ba - mn = 1\]
+This is equivalent to say
+\[gcd(a, b) = 1\]
+\end{proof}
+
+\begin{theorem}[Bezout's Identity]
+For integers a, b, then
+\[gcd(a, b) \iff m,n \in \Zbb ma + nb = 1\]
+\end{theorem}
+
+\subsection{The Euler $\phi$ Function}
+\begin{definition}
+For all $n \in \mathbb{Z}_+$, $\phi(n)$ is defined to be the number of integers $1 \leq m \leq n$ coprime to m.
+\[\phi(1) = 1\]
+\[\phi(p) = p - 1, \text{ for any prime } p\]
+\[\phi(p^e) = p^e - p^{e-1}, e \geq 1\]
+\end{definition}
+
+\begin{theorem}
+$\phi$ is a multiplicative function.
+\end{theorem}
+
+\begin{proof}
+If $(m, n) = 1$, then we wish to show $\phi(mn) = \phi(m)\phi(n)$.\\\\
+By the Chinese Remainder Theorem, $\mathbb{Z}/mn\mathbb{Z} \cong \mathbb{Z}/m\mathbb{Z} \times \mathbb{Z}/n\mathbb{Z}$.\\\\
+Then their multiplicative groups are isomorphic, so
+\[\phi(mn) = \phi(m)\phi(n)\]
+\end{proof}
+
+\begin{theorem}[Summatory Function of Euler $\phi$ Function]
+\[\sum_{d | n} \phi(d) = n\]
+\end{theorem}
+
+\begin{proof}
+Proof 1 (Very Ingenious Proof):\\\\
+Consider the n rational numbers,
+\[\frac{1}{n}, \frac{2}{n}, ..., \frac{n-1}{n}, \frac{n}{n} = 1\]
+and reduce those to lowest forms so that the numerator and denominator are coprime, then the question is\\\\
+Given a positive divisor $d$ of n, how many fractionals have $d$ as their denominator, then there's exactly $\phi(d)$ of them.\\\\
+Conversely, every denominator d that shows up is certainly a divisor of n, so we conclude that
+\[n = \sum_{d | n} \phi(d)\]
+Proof 2 (More General Proof):\\\\
+Note that this is a multiplicative function since $\phi$ is multiplicative, so it suffices for us to prove this on prime powers.\\\\
+Given $p^k$, then
+\begin{align*}
+    \sum_{d | p^k} \phi(d) &= \sum_{i = 1}^k p^k - p^{k-1}\\
+    &= p^k \tag*{Telescope Sum}
+\end{align*}
+\end{proof}

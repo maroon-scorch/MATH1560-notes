@@ -1,0 +1,139 @@
+\section{Lecture April 5th}
+
+\subsection{Integral bases for number fields}
+
+Before springbreak, recall that
+\begin{itemize}
+    \item We introduced embeddings of a number field $K$ into $\Cbb$, which was directly related to the notion of conjugates.
+    \item We also introduced discriminants of $\Qbb$-bases of number fields
+    \item We introduced algebraic integers, which are algebraic numbers whose minimal polynomial over $\Qbb$ have integer coefficients
+    \item The ring of integers of a number field $K$ is by definition
+    \[\mathcal{O}_K = K \cap \overline{\Zbb}\]
+    \item When $K = \Qbb$, $\mathcal{O}_K = \Zbb$
+\end{itemize}
+
+\begin{remark}
+The ring of integers of a number field $K$ is a free $\Zbb$-module of rank $n$, where $n$ is the degree of the number field $K$. The intuition is that $K$ is a $\Qbb$-vector space of dimension $n$, so its contraction to the algebraic integers turns it into a free $\Zbb$-module of rank $n$.
+\end{remark}
+
+\begin{definition}
+Suppose $B = \{\alpha_1, ..., \alpha_n\}$ is a $\Qbb$-basis for $K$ such that $\alpha_i \in \mathcal{O}_k$ for all $i$ (we can pick them in $\mathcal{O}_k$ in the spirit of Gauss's Lemma). We say that $B$ is an \mathbf{integral basis} for $\mathcal{O}_k$ if every element of $\alpha = \mathcal{O}_k$ can be expressed uniquely as
+\[\alpha = c_1 \alpha_1 + ... + c_n \alpha_n, c_1, ..., c_n \in \Zbb\]
+Note this is just the basis for a free $\Zbb$-module.
+\end{definition}
+
+\begin{theorem}
+Every number field has an integral basis.
+\end{theorem}
+
+\begin{proof}
+Let $K$ be a number field of degree $n$. We have noted that if $\{\alpha_1, ..., \alpha_n\}$ is a $\Qbb$-basis of $K$ such that $\alpha_i \in \mathcal{O}_k$ for all $i$, then the absolute value discriminant of the basis is
+\[|\Delta[\alpha_1, ..., \alpha_n]| \in \Zbb_+\]
+This follows from computing the determinant of the Vandermonde matrix.\\\\
+Let $\{\omega_1, ..., \omega_n\}$ be a $\Qbb$-basis with $\omega_i \in \mathcal{O}_k$, such that the absolute value of its discriminant is minimal among all the basis that are in $\mathcal{O}_k$.\\\\
+We claim that then $\{\omega_1, ..., \omega_n\}$ is an integral basis for $\mathcal{O}_k$.\\\\
+Indeed, suppose this is not true, then there exist some $\omega \in \mathcal{O}_k$ such that
+\[\omega = a_1 \omega_1 + ... + a_n \omega_n. a_1, ..., a_n \in \Qbb\]
+, but at least one $a_i \notin \Zbb$, without loss we will say $i = 1$.\\\\
+Then we can write
+\[a_1 = a + r, a \in \Zbb, 0 < r < 1\]
+Now consider $\Psi_1 = \omega - a \omega_1$, $\Psi_i = \omega_i$, for $2 \leq i \leq n$, and clearly $\psi_1, ..., \psi_n \in \mathcal{O}_k$.\\\\
+Clearly, $\Psi_1, ..., \Psi_n$ also form a $\Qbb$-basis for $K$. Now consider the matrix $M$ sending $\omega_i \mapsto \psi_i$ with respect to the $\omega_i$-basis, then
+\[M = \begin{pmatrix}
+a_1 - a & 0 & 0 & ... & 0\\
+a_2 & 1 & 0 & ... & 0\\
+a_3 & 0 & 1 & ... & 0\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+a_n & 0 & 0 & ... & 1
+\end{pmatrix}\]
+Since $M$ is a lower triangular matrix, $det(M)$ is just the product of all elements on its diagonal entry, so $det(M) = a_1 - a$. Hence we have that
+\[\Delta[\Psi_1, ..., \Psi_n] = (det(M))^2 \Delta[\omega_1, ..., \omega_n]\]
+But $a_1 - a < 1$, so this contradicts the minimality of the $\{\omega_1, ..., \omega_n\}$.\\\\
+Thus, $\{\omega_1, ..., \omega_n\}$ is an integral basis for $K$.
+\end{proof}
+
+\begin{remark}
+The proof doesn't tell us if there's an integral basis whose absolute value of discriminant is not minimal, but if such basis does exist we note that $det(M) = \pm 1$ since the matrix from one integral basis to another is an integer matrix that is invertible, so the determinant would send the matrix to the unit group of $\Zbb$.\\\\
+Thus, any integral basis has a discriminant achiebeing this minimal possible absolute value.
+\end{remark}
+
+
+\noindent How do you know you're looking at an integral basis? If you are lucky, you can sometimes diagnose this from the discriminant.
+
+\begin{theorem}[Page 50 of Stewart and Tall]
+Suppose $\{\alpha_1, ..., \alpha_n\}$, $\alpha_i \in \mathcal{O}_k$ is a $\Qbb$-basis of $K$, if $\Delta[\alpha_1, ..., \alpha_n]$ is square-free, then $\{\alpha_1, ..., \alpha_n\}$ is an integral basis.
+\end{theorem}
+
+\begin{proof}
+Suppose $\{\beta_1, ..., \beta_n\}$ is an integral basis, then there exist $c_{ij} \in \Zbb$ such that
+\[\alpha_i = \sum_{j} c_{ij} \beta_j, \forall i\]
+Then $M = (c_{ij})$ is the change of basis matrix from the $\alpha_i$ basis to the $\beta_i$ basis, so we have that
+\[\Delta[\alpha_1, ..., \alpha_n] = (det(M))^2 \cdot \Delta[\beta_1, ..., \beta_n]\]
+Now since $\Delta[\alpha_1, ..., \alpha_n]$ is square-free, and both $det(M)$ and $\Delta[\beta_1, ..., \beta_n]$ are integers, so it follows that $det(M) = \pm 1$.\\\\
+Thus $\Delta[\alpha_1, ..., \alpha_n] = \Delta[\beta_1, ..., \beta_n]$, so $\{\alpha_1, ..., \alpha_n\}$ is itself also an integral basis.
+\end{proof}
+
+\begin{example}
+Suppose $K = \Qbb(\sqrt{5})$, then we previously observed that $\theta = \frac{1 + \sqrt{5}}{2} \in \overline{\Zbb}$, hence $\theta \in \mathcal{O}_k$.\\\\
+Then
+\[\Delta[1, \frac{1 + \sqrt{5}}{2}] = 5\]
+Since $5$ is square-free, this means that we also have an integral basis for $K$. We also note that $\mathcal{O}_k = \Zbb[\frac{1 + \sqrt{5}}{2}]$.
+\end{example}
+
+\begin{definition}
+Let $K$ be a number field, the \textbf{discriminant} associated to any integral basis of $\mathcal{O}_k$ is called the \textbf{discriminant of K}. We refer to ths as $disc(K)$ or $\Delta(K)$.
+\end{definition}
+
+\begin{example}
+Examples of Discriminants
+\begin{itemize}
+    \item $K = \Qbb(\sqrt{5})$ has $disc(K) = 5$
+    \item $K = \Qbb(\sqrt{2})$, then we note $\mathcal{O}_k = \Zbb[\sqrt{2}]$, so
+    \[disc(K) = \Delta[1, \sqrt{2}] = (-2\sqrt{2})^2 = 8\]
+    We also note that $disc(K)$ is the same as the minimal polynomial of $\theta$, which is $x^2 - 2$, with discriminant $b^2 - 4ac = 8$
+    \item More interesting example, when $K = \Qbb(\theta)$ for $\theta$ a root of $x^3 - x^2 - 2x - 8$. An integral basis for $\mathcal{O}_k$ is 
+    \[\{1, \theta, \frac{\theta + \theta^2}{2}\}\]
+    This is a number field that has NO power integral basis, and the discriminant is $-503$, which is prime.
+\end{itemize}
+\end{example}
+
+\begin{definition}
+Note that the following terms are synonymous
+\begin{itemize}
+    \item $\mathcal{O}_k = \Zbb[\theta]$ for $\theta \in \overline{\Zbb} \cap \mathcal{O}_k$
+    \item $\mathcal{O}_k$ (or K) is monogenic
+    \item $\{1, \theta, ..., \theta^{n-1}\}$ form an integral basis for some $\theta \in \mathcal{O}_k$
+    \item $\mathcal{O}_k$ (or K) has a power integral basis.
+\end{itemize}
+\end{definition}
+
+\noindent There are a couple number fields that we are interested in studying in more details
+\begin{itemize}
+    \item \textbf{Quadratic Fields}
+    \item \textbf{Cyclotomic Extensions}
+\end{itemize}
+
+\subsection{Quadratic Field}
+
+\begin{definition}
+A quadratic field is a number field $K$ of degree $2$ over $\Qbb$. Thus
+\[K \text{ is quadratic } \implies K = \Qbb(\theta)\]
+, where $\theta$ is a root of $x^2 + ax + b$, $a, b \in \Zbb$, so in other words
+\[\theta = \frac{-a \pm \sqrt{a^2 - 4b}}{2}\]
+Let $a^2 - 4b = r^2 d$, where $r, d \in \Zbb$, $d$ is square-free (so we have a square-free decomposition), then
+\[\theta = \frac{-a \pm r \sqrt{d}}{2}\]
+\end{definition}
+
+\begin{proposition}[p.64 of ST]
+The $K$ is a quadratic fields if and only if
+\[K = \Qbb(\sqrt{d})\]
+where $d$ is a square-free integer.
+\end{proposition}
+
+\begin{theorem}[p.64 of ST]
+Let $d \in \Zbb$ be a square-free integer, and let $K = \Qbb(\sqrt{d})$, then $\mathcal{O}_k$ is equal to
+\begin{itemize}
+    \item $\Zbb[\sqrt{d}]$ if $d \not \equiv 1\ mod\ 4$
+    \item $\Zbb[\frac{1 + \sqrt{d}}{2}]$ if $d \equiv 1\ mod\ 4$
+\end{itemize}
+\end{theorem}

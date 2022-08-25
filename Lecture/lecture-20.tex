@@ -1,0 +1,85 @@
+\section{Lecture April 26th}
+
+\subsection{Recall:}
+
+Last time, we 
+\begin{itemize}
+    \item introduced definitions of ramified primes, totally split primes, inert primes, and totally ramified primes
+    \item We proved that given a number field $K$ and rational prime $p$, $p | Disc(K) \iff p$ ramifies in $K$ (we assumed $K$ to be monogenic but it holds it general)
+    \item The main idea of $\mathcal{O}_K = \Zbb[\theta]$ is that we can understand $\mathcal{O}_K$ well via $minpoly_\Qbb(\theta)$. and that
+    \[(p) = p_1^{e_1} ... p_r^{e_r}\]
+\end{itemize}
+
+The main idea of this proof is also used in proving what's known as the Dedekind-Kummer Theorem (part of why she wanted to become a mathematician).
+
+\subsection{Dedekind-Kummer Theorem:}
+
+\begin{theorem}[Dedekind-Kummer]
+Let $K = \Qbb(\theta)$ with $\theta \in \mathcal{O}_K$. Let $f$ be the minimal polynomial of $\theta$ over $\Qbb$, and let $p \in \Zbb$ be a prime rational integer.\\\\
+Suppose that $p \nmid [\mathcal{O}_K : \Zbb[\theta]]$. If $\overline{f}(x) = \overline{\pi_1}(x)^{e_1} ... \overline{\pi_r}(x)^{e_r}$ be the factorization of $f(x)$ into irreducibles modulo $p$.\\\\
+Then,
+\[p\mathcal{O}_K = p_1^{e_1} ... p_r^{e_r}\]
+is the prime factorization of $p\mathcal{O}_K$, where in fact
+\[p_i = (p, \pi_i(\theta))\]
+for any lift $\pi_i \in \Zbb[x]$ of $\overline{\pi}_i$.\\\\
+Note that, we say that $\pi(x)$ is a lift of $\overline{\pi}(x)$ if
+\[\pi(x)\ mod\ p = \overline{\pi}(x)\]
+\end{theorem}
+
+\begin{example}
+Here are some applications of the Dedekind Kummer Theorem.
+\begin{itemize}
+    \item 1) Let $K = \Qbb(\zeta_5)$, then we have that $\mathcal{O}_K = \Zbb[\zeta_5]$, so we can apply $D-K$ theorem to the minimal polynomial of $\zeta_5$, which is just $f(x) = x^4 + x^3 + x^2 + 1$.\\\\
+    Let's try factoring $2 \mathcal{O}_K$, then in $f\ mod\ 2$, we claim that $\overline{f}(x)$ is irreducible modulo $2$.\\\\
+    Indeed, if not, then $f$ has either a linear or a quadratic factor modulo $2$, but it doesn't have any roots, so no linear factors mod 2.\\\\
+    As for quadratic factors, suppose it exist, then we have some $\alpha$ such that $deg_{\Fbb_2}(\alpha) = 2$ is a root of $f$. Hence we have that $\Fbb_2(\alpha) \cong \Fbb_4$, so $\alpha^4 = \alpha$, so $\alpha$ is a root of
+    \[x^3 + x^2 + 2x + 1 = x^3 + x^2 + 1\ (mod\ 2)\]
+    So $minpol_{\Fbb_2}(\alpha) | x^3 + x^2 + 1$, but $x^3 + x^2 + 1$ is irreducible in $\Fbb_2$.\\\\
+    Thus, $\overline{f}(x)$ is irreducible in modulo $2$, so in other words, using the D-K Theorem,
+    \[2\mathcal{O}_K = (2, 0) = (2)\]
+    So we have that $(2)$ is inert since it's a prime ideal in $\mathcal{O}_K$.
+    \item 2) Let's factor $5 \mathcal{O}_K$ in $K = \Qbb(\zeta_5)$, then
+    \[f(x) \equiv x^4 - 4x^3 + 6x^2 - 4x + 1\ mod\ 5 \equiv (x - 1)^4\ mod\ 5\]
+    So we have that
+    \[5\mathcal{O}_K = (5, \zeta_5 - 1)^4\]
+    , so $5$ is totally ramified in $\mathcal{O}_K$.
+    \item 3) Consider $11 \mathcal{O}_K$ in $K = \Qbb(\zeta_5)$, then
+    \[f(x) \equiv (x -4)(x-9)(x-5)(x-3)\ mod\ 11\]
+    So we have that
+    \[11\mathcal{O}_K = (11, \zeta_5 - 4)(11, \zeta_5 - 9)(11, \zeta_5 - 5)(11, \zeta_5 - 3)\]
+    So $11$ is totally split in $\mathcal{O}_K$.
+    \item 4) More generally, for $K = \Qbb(\zeta_n)$ where $n \geq 3$ is prime, $p$ splits completely if and only if $p \equiv 1\ mod\ n$.
+\end{itemize}
+\end{example}
+
+\noindent {\bf Now we will proceed to prove the Dedekind Kummer Theorem.}
+
+\begin{proof}
+Consider the homomorphism:
+\[\phi: \frac{\Zbb[\theta]}{p\Zbb[\theta]} \to \frac{\mathcal{O}_K}{p\mathcal{O}_K}\]
+By sending (this is well-defined)
+\[x + p \Zbb[\theta] \mapsto x + p \mathcal{O}_K\ \ (*)\]
+Let $m = [\mathcal{O}_K : \Zbb[\theta]]$, then by our hypothesis $p \nmid m$.\\\\
+We claim that $\phi$ is in fact surjective, indeed, let $x \in \mathbb{O}_K$, then applying Lagrange's Theorem to the quotient group $\mathcal{O}_K/\Zbb[\theta]$ tells us that
+\[y := mx \in \Zbb[\theta]\]
+As adding it $m$ times modulo $\Zbb[\theta]$ gets it into $\Zbb[\theta]$.\\\\
+Let $m^\prime$ be such that $m^\prime m \equiv 1\ mod\ p\Zbb[\theta]$, so this implies that $m^\prime m \equiv 1\ mod\ p\mathcal{O}_K$.\\\\
+Then we have that
+\[\phi(m^\prime y + p \Zbb[\theta]) = m^\prime mx + p \mathcal{O}_K = x + p \mathcal{O}_K \]
+So we have shown that $\phi$ is indeed surjective. Now recall that
+\[\phi: \frac{\Zbb[\theta]}{p\Zbb[\theta]} \to \frac{\mathcal{O}_K}{p\mathcal{O}_K}\]
+Let $\{\alpha_1, ..., \alpha_n\}$ be an integral basis of $\mathcal{O}_K$ and let $\{1, \theta, ..., \theta^{n-1}\}$ be a basis of $\Zbb[\theta]$, then clearly $\frac{\Zbb[\theta]}{p\Zbb[\theta]}$ has order $p^n$, and the same with the range.\\\\
+So $\phi$ is a function between two rings of the same cardinality, and since $\phi$ is surjective, $\phi$ is in fact an isomorphism.\\\\
+Hence, we have that
+\[\frac{\Zbb[\theta]}{p\Zbb[\theta]} \cong \frac{\mathcal{O}_K}{p\mathcal{O}_K}\]
+Last time we said that
+\[\frac{\Zbb[\theta]}{p\Zbb[\theta]} \cong \frac{\Fbb_p[x]}{(\overline{f})} \cong \frac{\Fbb_p[x]}{(\overline{\pi}_1^{e_1}(x))} \times ... \times \frac{\Fbb_p[x]}{(\overline{\pi}_r^{e_r}(x))}\]
+, where we have that
+\[\overline{f} = \overline{\pi_1}^{e_1} ... \overline{\pi_r}^{e_r}\] is the prime factorzation of $\overline{p}$.\\\\
+We also have that on the other hand,
+\[\mathcal{O_k}/(p) \cong \frac{\mathcal{O_k}}{(p_1^{e_1})} \times ... \times \frac{\mathcal{O_k}}{(p_r^{e_r})}\]
+Now since we have shown that (without using Monogenicity)
+\[\frac{\Zbb[\theta]}{p\Zbb[\theta]} \cong \frac{\mathcal{O}_K}{p\mathcal{O}_K}\]
+The same argument as last time implies that the $\pi_i$'s correspondent to the $p_i$'s and the exponents align after appropriate reordering.\\\\
+We will finish the proof on the expression next time!
+\end{proof}

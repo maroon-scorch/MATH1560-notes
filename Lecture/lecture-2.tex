@@ -1,0 +1,166 @@
+\section{Lecture 2 (February 1st)}
+
+\subsection{Annoucement}
+A few notes:
+\begin{itemize}
+    \item Homework 0 (biography) is going up tonight
+    \item Lecture notes will (generally) be posted after each class
+\end{itemize}
+
+\subsection{Unique Factorization}
+
+\begin{definition}[Common Definitions]
+We will establish some elementary notations first:
+\begin{itemize}
+    \item We denote $a | b$ as ``a divides b" and $a \nmid b$ as ``a does not divide b".
+    \item  We say that a positive integer $p \geq 2$ is \textit{prime} if its only positive divisors are 1 and p.
+    \item $\mathbb{Z}_+$ denotes the set of positive integers, and let $\mathbb{N}$ be the natural numbers with 0!
+    \item For a non-zero $n \in \mathbb{Z}$ and a prime p, there is a non-negative integer a such that $p^a | n$ but $p^{n+1} | n$, the number $a$ is denoted as \textit{the order of n at p} or $ord_pn$
+    \item For $n = 0$, by convention we say that $ord_p 0 = \infty$
+    \item Note that fairly trivially
+    \[ord_p n = 0 \iff p \nmid n\]
+\end{itemize}
+\end{definition}
+
+\begin{lemma}
+Every non-zero integer can be written as a product of primes, except for -1. (Note that by convention the empty product is 1)
+\end{lemma}
+
+\begin{proof}
+Suppose there exist some non-zero integer that can't be written as a product of primes, let N be the smallest integer greater than 2 that can't be written as a product of primes.\\\\
+Clearly, N is not prime, or else $N = N$ is a valid product of primes.\\\\
+Then we can write $N = a \cdot b$ where $1 < a, b < N$, but a and b can be written as product of primes, since N is the minimal number greater than 2 that can't be written as a product of primes. This is a contradiction.
+\end{proof}
+
+\begin{remark}
+Hence, for all non-negative integer n, we can write
+\[n = (-1)^{\epsilon} \prod_{p\ \text{pos prime}} p^{a(p)}\]
+, where $\epsilon \in \{0, 1\}$ and $a(p)$ is a non-negative integer.
+\end{remark}
+
+\begin{theorem}[Unique Factorization]
+For every non-zero integer n, there is a prime factorization 
+\[n = (-1)^{\epsilon} \prod_{p\ \text{pos prime}} p^{a(p)}\]
+where $\epsilon, a(p)$ are uniquely determined.\\\\
+Moreover, $a(p) = ord_p n$
+\end{theorem}
+
+Before the proof, we recall a few things from Abstract Algebra
+\begin{lemma}[The Integers are an Euclidean Domain]
+If $a, b \in \mathbb{Z}$ with $b > 0$, then there exist $q, r \in \mathbb{Z}$ st.
+\[a = bq + r\]
+, with $0 \leq r < b$
+\end{lemma}
+
+\begin{proof}
+Consider the set 
+\[S = \{a - xb\ |\ x \in \mathbb{Z}\}\]
+Note that S contains positive elements, (if a is positive, pick x = 0, if a is negative or zero, pick sufficiently negative value of x)\\\\
+Let $r = a - qb$ be the least non-negative element of S.\\\\
+Then we claim that the pair $(q, r)$ here is the pair we are looking for. To do this, we only need to show that $0 \leq r < b$, suppose for the sake of contradiction that $r \geq b$, then
+\[r = a - qb \geq b\]
+But this means that
+\[a - (q + 1)b \geq 0\]
+So r is not the smallest integer possible satisfying the constraint, contradiction.
+\end{proof}
+
+\begin{corollary}
+$\mathbb{Z}$ is an Euclidean domain, with Euclidean function given by $x \mapsto |x|$.
+\end{corollary}
+
+\noindent Quick recall on what the Euclidean Domain is:
+\begin{definition}[Euclidean Domain]
+Let R be an integral domain, then R is said to be a Euclidean Domain if there exist a \textit{Euclidean function} $\lambda: R - \{0\} \to \mathbb{Z}_{\geq 0}$ such that
+\begin{itemize}
+    \item if $a, b \in R$ and $b \neq 0$, then there exists $c, d \in R$ such that
+    \[a = cb + d, d = 0 \text{ or } \lambda(d) < \lambda(b)\]
+\end{itemize}
+\end{definition}
+
+\begin{example}
+$\mathbb{Z}$ is a Euclidean domain with $\lambda = |\cdot|$\\
+$k[x]$, where $k$ is a field is an Euclidean Domain with $\lambda = deg$
+\end{example}
+
+\begin{definition}
+If an ideal $I = (a)$ for some $a \in I$, then I is said to be a principal ideal.\\\\
+R is said to be a principal ideal domain (PID) if every ideal in R is a principal ideal.
+\end{definition}
+
+\begin{proposition}
+If R is an Euclidean Domain, then R is a PID. (ie. For any ideal $I \subset R$, there exists some $a \in R$ such that $I = aR$
+\end{proposition}
+
+\begin{proof}
+If I is the zero ideal, then $I = (0)$ and is thus principal.\\\\
+Now suppose I is a non-zero ideal, then there exists some non-zero element $a \in I$, we can choose a such that $\lambda(a)$ is minimal.\\\\
+Now consider all $b \in I$, since R is an Euclidean Domain, we have that
+\[b = qa + r\]
+, where $\lambda(r) < \lambda(a)$ or $r = 0$.\\\\
+If r is non-zero, this would violate the minimality of $\lambda(a)$ and be a contradiction, thus $r = 0$.\\\\
+SO $b = qa$. Thus, I is a principal ideal.\\\\
+Thus, R is a PID.
+\end{proof}
+
+\begin{definition}[Irreducible vs Prime]
+We say $p \in R$ is \textbf{irreducible} if $a | p \implies $ a is either a unit, or an associate of p. We say $p \in R$ is \textbf{prime} if p is not a unit, p is non-zero, and $p | ab$ implies that either $p | a$ or $p | b$
+\end{definition}
+
+\begin{remark}
+The zero ideal is a prime ideal. The prime elements generate prime ideals, but the zero element itself is not prime.
+\end{remark}
+
+\begin{definition}[Greatest Common Divisor]
+Let R be an integral domain, then we $d \in R$ is said to be the gcd of $a, b \in R$ if
+\begin{itemize}
+    \item i) d divides a and d divides b
+    \item ii) If $d^\prime | a$ and $d^\prime | b$, then $d^\prime | d$
+\end{itemize}
+We denote $(a, b)$ as the gcd of a and b, and in fact in the integers,
+\[dR = aR + bR\]
+gcd's are also only unique up to units. For the integers, we will refer the gcd to only the positive gcd.\\\\
+Aside for Ring Theory enthusiasts, GCD Domains are a class of rings more general than PIDs and UFDs.
+\end{definition}
+
+\noindent There are two important properties of PIDs:
+\begin{itemize}
+    \item 1) Nonunit irreducible elements are exactly the prime elements
+    \item 2) GCDs always exist in PIDs
+\end{itemize}
+
+\noindent We are now ready to prove unique factorization in $\mathbb{Z}$, after the lemma.
+
+\begin{lemma}
+Suppose p is a prime, and $a, b \in \mathbb{Z}$, then $ord_p(ab) = ord_p(a) + ord_p(b)$
+\end{lemma}
+
+\begin{proof}
+If one of a and b is 0, that case is trivial.\\\\
+So WLOG, we can assume that $a, b \neq 0$. Let $\alpha = ord_p(a)$ and $\beta = ord_p(b)$, then
+\[a = p^{\alpha}*c,\ p \nmid c\]
+\[b = p^\beta*d,\ p \nmid d\]
+So we have that
+\[ab = p^{\alpha + \beta}(dc)\]
+Note that $p \nmid dc$ because $p \nmid d$ and $p \nmid c$ (contrapositive of definition of prime), so $ord_p(ab) = \alpha + \beta$.\\\\
+Note that we used the fact that the non-unit irreducible element is prime in a PID (so the definition of prime in $\mathbb{Z}$ aligns with that of prime in PID).
+\end{proof}
+
+\begin{theorem}[The Fundamental Theorem of Arithmetic]
+$\mathbb{Z}$ is a UFD.
+\end{theorem}
+
+\begin{proof}
+Recall that for a non-zero $n \in \mathbb{Z}$, we can write
+\[n = (-1)^{\epsilon} \prod_{p\ \text{pos prime}} p^{a(p)}\]
+, where $\epsilon \in \{0, 1\}$ and $a(p) \geq 0$.\\\\
+This is the existence part, now we will prove the uniqueness part.\\\\
+Given a positive prime q, we can take $ord_q$ of both sides of the expressions:
+\begin{align*}
+    ord_q(n) &= \epsilon \cdot ord_q(-1) + \sum_p a(p) ord_q(p) \\
+    &= 0 + \sum_p a(p) ord_q(p)\\
+    &= a(q)ord_q(q) \tag*{$ord_q(p) = 0$ for all $p \neq q$}\\
+    &= a(q) \cdot 1\\
+    &= a(q)
+\end{align*}
+Since the positive prime q is arbitrarily chosen, the factorization has to be unique.
+\end{proof}
